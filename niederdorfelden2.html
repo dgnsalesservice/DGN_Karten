@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Niederdorfelden2 Karte</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        .leaflet-container {
+            height: 100%;
+            width: 100%;
+            max-width: 100%;
+            max-height: 100%;
+        }
+        .leaflet-control-zoom {
+            background: none !important;
+            box-shadow: none !important;
+            border: none !important;
+        }
+
+        /*+ und - button formatierung*/
+        .leaflet-control-zoom-in, .leaflet-control-zoom-out {
+            background-color: white !important; /*hintergrundfarbe*/
+            color: grey !important; /*button farbe*/
+            border: none !important; /*keine umrandung*/
+            width: 30px; 
+            height: 30px; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 15px; /*symbolgröße*/
+            font-weight: 20;
+            font-family: 'Montserrat', sans-serif; /*dgn font*/
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /*schatten*/
+        }
+
+        .leaflet-control-zoom-in:hover, .leaflet-control-zoom-out:hover {
+            background-color: #f0f0f0 !important; /* hover maus effekt */
+        }
+        /*zurück zu ausgangskarte zoomen button formatieren*/
+        .custom-control {
+            position: absolute;
+            bottom: -40px;
+            left:0px;
+            background: white;
+            padding: 5px;
+            border-radius: 2px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 20px;
+            height: 20px;
+            color: grey
+        }
+
+        /*legenden button formatieren*/
+        .custom-control2 {
+            position: absolute;
+            bottom: -320px;
+            left: 0px;
+            background: white;
+            padding: 5px;
+            border-radius:2px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 20px;
+            height: 20px;
+            color: grey
+        }
+        .custom-control:hover, .custom-control2:hover {
+            background-color: #f0f0f0 !important;
+        }
+            /* Style for the search button to match others */
+        .leaflet-control-geocoder-icon {
+            background-color: white !important;
+            color: grey !important;
+            border: none !important;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 15px;
+            font-family: 'Montserrat', sans-serif;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            border-radius: 2px;
+            cursor: pointer;
+        }
+        .leaflet-control-geocoder-icon:hover {
+            background-color: #f0f0f0 !important;
+        }
+
+        /* Custom style for the gray circle marker */
+        .custom-marker {
+            width: 15px;
+            height: 15px;
+            background-color: grey;
+            border-radius: 50%;
+            border: 1px solid white;
+        }
+        /*legende formatieren*/
+        #legend {
+            position: absolute;
+            bottom: 80px;
+            left: 55px;
+            display: none;
+            z-index: 1000;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        #legend div {
+            font-size: 12px;
+            line-height: 18px;
+        }
+    </style>
+      <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+</head>
+<body>
+<div id="map"></div>
+<div id="legend">
+    <div><span style="display:inline-block; width:20px; height:10px; background:#E8B899; margin-right:5px;"></span>Ausbauphase 1: Ausbau bei ausreichender Nachfrage</div>
+    <div><span style="display:inline-block;width:20px; height:10px; background:#BCBCBB; margin-right:5px;"></span>Ausbauphase 2: Interessenbekundung möglich</div>
+</div>
+<script>
+    const map = L.map('map',{
+    zoomControl: false //default zoom - + rausnehmen
+}).setView([50.6, 9], 10);
+
+
+    const CartoDB_Positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 22
+    }).addTo(map);
+
+    L.control.zoom({
+        position: 'topleft'
+    }).addTo(map);
+  
+  	const geoJsonData = {
+"type" : "FeatureCollection", "features" : [
+{"type" : "Feature", "properties" : {"dgn_phase":2}, "geometry" : {"type":"MultiPolygon","coordinates":[[[[8.817838295,50.187946639],[8.818093845,50.18806621],[8.820327142,50.188205721],[8.821020024,50.187468313],[8.819388116,50.186785612],[8.817838295,50.187946639]]]]}},
+{"type" : "Feature", "properties" : {"dgn_phase":1}, "geometry" : {"type":"MultiPolygon","coordinates":[[[[8.804842661,50.190305083],[8.804726261,50.190485034],[8.804456012,50.190421427],[8.804134542,50.190856184],[8.803435636,50.190693629],[8.803413003,50.190774969],[8.803369704,50.190845618],[8.80294069,50.191545635],[8.803619413,50.19174114],[8.803644769,50.191748444],[8.804172873,50.190932933],[8.805176502,50.191209783],[8.805977248,50.191272019],[8.806060395,50.190797913],[8.80612407,50.190656231],[8.804866077,50.1903115],[8.804842661,50.190305083]]]]}},
+{"type" : "Feature", "properties" : {"dgn_phase":1}, "geometry" : {"type":"MultiPolygon","coordinates":[[[[8.809950844,50.193193907],[8.810075464,50.192847301],[8.810723298,50.192939704],[8.810602362,50.193312226],[8.811299695,50.19343886],[8.811466145,50.192974138],[8.811487246,50.192789062],[8.811487359,50.192788071],[8.811488051,50.192781998],[8.811269504,50.19274437],[8.811267743,50.192522771],[8.809844644,50.192249799],[8.809759574,50.192439116],[8.809393601,50.192368316],[8.809082166,50.193046993],[8.809123456,50.193053825],[8.809753386,50.193158047],[8.809950844,50.193193907]]]]}},
+{"type" : "Feature", "properties" : {"dgn_phase":1}, "geometry" : {"type":"MultiPolygon","coordinates":[[[[8.806520817,50.191937386],[8.806615859,50.191513757],[8.806290022,50.191463689],[8.806101817,50.191742484],[8.805595175,50.192310224],[8.805782436,50.192364159],[8.805732357,50.192427158],[8.80572827,50.192432299],[8.805932587,50.192490091],[8.805935139,50.192487347],[8.805939449,50.192482715],[8.805992069,50.192426156],[8.806520817,50.191937386]]]]}},  
+{"type" : "Feature", "properties" : {"dgn_phase":1}, "geometry" : {"type":"MultiPolygon","coordinates":[[[[8.807107679,50.190923845],[8.807044369,50.191091145],[8.807212285,50.19112268],[8.807107956,50.191348754],[8.808811406,50.191677198],[8.808929603,50.191440572],[8.808553079,50.191374827],[8.808647367,50.191166268],[8.808646381,50.191166067],[8.807173991,50.190864936],[8.807107679,50.190923845]]]]}
+}]};
+
+
+
+
+    const geoLayer = L.geoJSON(geoJsonData, {
+        style: feature => {
+            if (feature.properties.dgn_phase === 2) {
+                return { stroke: false, fillColor: 'grey', fillOpacity: 0.5 };
+            } else {
+                return { stroke: false, fillColor: '#ED782B', fillOpacity: 0.4 };
+            }
+        }
+    });
+
+    geoLayer.addTo(map);
+    map.fitBounds(geoLayer.getBounds());
+
+    //button der auf ausgangskarte zurück zoomt auf karte bringen
+    const zoomFullExtentControl = L.Control.extend({
+        options: { position: 'topleft' },
+        onAdd: function () {
+            const container = L.DomUtil.create('div', 'custom-control');
+            container.innerHTML = '<i class="fas fa-home"></i>';
+            L.DomEvent.on(container, 'click', () => map.fitBounds(geoLayer.getBounds()));
+            return container;
+        }
+    });
+    map.addControl(new zoomFullExtentControl());
+
+    //legende button auf karte bringen
+    const legendControl = L.Control.extend({
+        options: { position: 'topleft' },
+        onAdd: function () {
+            const container = L.DomUtil.create('div', 'custom-control2');
+            container.innerHTML = '<i class="fas fa-list"></i>';
+            L.DomEvent.on(container, 'click', () => {
+                const legend = document.getElementById('legend');
+                legend.style.display = legend.style.display === 'none' ? 'block' : 'none';
+            });
+            return container;
+        }
+    });
+    map.addControl(new legendControl());
+    
+    const markerLayerGroup = L.layerGroup().addTo(map);
+
+    // Override the default marker with a gray circle
+    const geocoder = L.Control.geocoder({
+        defaultMarkGeocode: false // Disable default marker behavior
+    })
+        .on('markgeocode', function (e) {
+            // Clear existing markers
+            markerLayerGroup.clearLayers();
+
+            const latlng = e.geocode.center;
+
+            // Add a custom gray circle marker
+            const customMarker = L.divIcon({
+                className: 'custom-marker'
+            });
+
+            const marker = L.marker(latlng, { icon: customMarker });
+            markerLayerGroup.addLayer(marker);
+
+            // Zoom to the location
+            map.setView(latlng, 14);
+        })
+        .addTo(map);
+
+</script>
+</body>
+</html>
