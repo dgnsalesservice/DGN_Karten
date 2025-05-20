@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Niederdorfelden1 Karte</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        .leaflet-container {
+            height: 100%;
+            width: 100%;
+            max-width: 100%;
+            max-height: 100%;
+        }
+        .leaflet-control-zoom {
+            background: none !important;
+            box-shadow: none !important;
+            border: none !important;
+        }
+
+        /*+ und - button formatierung*/
+        .leaflet-control-zoom-in, .leaflet-control-zoom-out {
+            background-color: white !important; /*hintergrundfarbe*/
+            color: grey !important; /*button farbe*/
+            border: none !important; /*keine umrandung*/
+            width: 30px; 
+            height: 30px; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 15px; /*symbolgröße*/
+            font-weight: 20;
+            font-family: 'Montserrat', sans-serif; /*dgn font*/
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /*schatten*/
+        }
+
+        .leaflet-control-zoom-in:hover, .leaflet-control-zoom-out:hover {
+            background-color: #f0f0f0 !important; /* hover maus effekt */
+        }
+        /*zurück zu ausgangskarte zoomen button formatieren*/
+        .custom-control {
+            position: absolute;
+            bottom: -40px;
+            left:0px;
+            background: white;
+            padding: 5px;
+            border-radius: 2px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 20px;
+            height: 20px;
+            color: grey
+        }
+
+        /*legenden button formatieren*/
+        .custom-control2 {
+            position: absolute;
+            bottom: -320px;
+            left: 0px;
+            background: white;
+            padding: 5px;
+            border-radius:2px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 20px;
+            height: 20px;
+            color: grey
+        }
+        .custom-control:hover, .custom-control2:hover {
+            background-color: #f0f0f0 !important;
+        }
+            /* Style for the search button to match others */
+        .leaflet-control-geocoder-icon {
+            background-color: white !important;
+            color: grey !important;
+            border: none !important;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 15px;
+            font-family: 'Montserrat', sans-serif;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            border-radius: 2px;
+            cursor: pointer;
+        }
+        .leaflet-control-geocoder-icon:hover {
+            background-color: #f0f0f0 !important;
+        }
+
+        /* Custom style for the gray circle marker */
+        .custom-marker {
+            width: 15px;
+            height: 15px;
+            background-color: grey;
+            border-radius: 50%;
+            border: 1px solid white;
+        }
+        /*legende formatieren*/
+        #legend {
+            position: absolute;
+            bottom: 80px;
+            left: 55px;
+            display: none;
+            z-index: 1000;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        #legend div {
+            font-size: 12px;
+            line-height: 18px;
+        }
+    </style>
+      <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+</head>
+<body>
+<div id="map"></div>
+<div id="legend">
+    <div><span style="display:inline-block; width:20px; height:10px; background:#E8B899; margin-right:5px;"></span>Ausbauphase 1: Ausbau bei ausreichender Nachfrage</div>
+    <div><span style="display:inline-block;width:20px; height:10px; background:#BCBCBB; margin-right:5px;"></span>Ausbauphase 2: Interessenbekundung möglich</div>
+</div>
+<script>
+    const map = L.map('map',{
+    zoomControl: false //default zoom - + rausnehmen
+}).setView([50.2, 8.8], 10);
+
+
+    const CartoDB_Positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 22
+    }).addTo(map);
+
+    L.control.zoom({
+        position: 'topleft'
+    }).addTo(map);
+  
+  	const geoJsonData = {
+"type": "FeatureCollection",
+"features": [
+{"type" : "Feature", "properties" : {"dgn_phase": 1}, "geometry" : {"type":"MultiPolygon","coordinates":[[[[8.802941548,50.19616825],[8.802561955,50.195564266],[8.802573368,50.1954451],[8.802527565,50.195075783],[8.802331655,50.194765804],[8.802247911,50.194622328],[8.802251147,50.194573257],[8.802311081,50.194458459],[8.802341042,50.194402423],[8.80237057,50.194304321],[8.802180269,50.194106135],[8.801976556,50.193923895],[8.801822897,50.193815354],[8.80179138,50.19380751],[8.801605024,50.193683333],[8.801240829,50.19342993],[8.80063856,50.19323571],[8.800551772,50.19315741],[8.800519593,50.193170741],[8.800377629,50.193001409],[8.800168902,50.193052129],[8.799967058,50.192768206],[8.799815983,50.192810218],[8.799387789,50.192855274],[8.79925679,50.192689482],[8.799031571,50.192747217],[8.798936262,50.192576203],[8.799315224,50.192494075],[8.799233685,50.192310754],[8.799692393,50.192184729],[8.799547869,50.19197312],[8.798125117,50.192347583],[8.798174026,50.192460394],[8.798003656,50.192523506],[8.797487876,50.192519085],[8.797031948,50.192634538],[8.796190773,50.193017037],[8.796069498,50.193147163],[8.796003487,50.193185797],[8.79602395,50.193534577],[8.795837367,50.193537773],[8.795789183,50.193255874],[8.795152254,50.193349864],[8.795146073,50.193511897],[8.793966002,50.193580263],[8.793959061,50.193918428],[8.792839511,50.193947261],[8.792835567,50.193997933],[8.792810458,50.194320613],[8.793147544,50.194411041],[8.793195089,50.19483737],[8.793449814,50.194939981],[8.793435358,50.195110804],[8.793564261,50.195123363],[8.793624823,50.195713518],[8.793758146,50.195974433],[8.793951324,50.196353463],[8.794355948,50.196694118],[8.794498279,50.196775391],[8.794986365,50.19685023],[8.795724058,50.19694488],[8.796448538,50.196921493],[8.796479877,50.197294951],[8.796647245,50.197297006],[8.796655319,50.197334008],[8.796918729,50.197334469],[8.796957271,50.197304593],[8.797190589,50.197283865],[8.797218632,50.197141245],[8.797322928,50.197134382],[8.797416264,50.197123977],[8.797421313,50.197227905],[8.797810932,50.197230344],[8.798142992,50.197218593],[8.798146471,50.197044226],[8.798500441,50.197041318],[8.798571286,50.197159451],[8.798744757,50.197902285],[8.797969011,50.197916069],[8.797975812,50.198335598],[8.798740486,50.198408449],[8.799023294,50.197908269],[8.799022509,50.197035879],[8.801025549,50.196571806],[8.801164423,50.196709836],[8.801476716,50.196577926],[8.801643682,50.196676846],[8.8018677,50.196581236],[8.801725752,50.19640486],[8.802941548,50.19616825]]]]}}, 
+{"type" : "Feature", "properties" : {"dgn_phase": 1}, "geometry" : {"type":"MultiPolygon","coordinates":[[[[8.800551772,50.19315741],[8.80063856,50.19323571],[8.801240829,50.19342993],[8.801605024,50.193683333],[8.80179138,50.19380751],[8.801822897,50.193815354],[8.801976556,50.193923895],[8.802180269,50.194106135],[8.80237057,50.194304321],[8.802341042,50.194402423],[8.802311081,50.194458459],[8.802251147,50.194573257],[8.802247911,50.194622328],[8.802331655,50.194765804],[8.802527565,50.195075783],[8.802573368,50.1954451],[8.802561955,50.195564266],[8.802941548,50.19616825],[8.80373996,50.19601286],[8.803451373,50.195462834],[8.803294276,50.195299645],[8.804315816,50.195090009],[8.80424344,50.194955694],[8.804646812,50.194805611],[8.804726108,50.194927002],[8.805177748,50.194902724],[8.805153615,50.194646699],[8.805987942,50.194397296],[8.805967256,50.194675392],[8.806529219,50.194708498],[8.806953279,50.194640079],[8.807156688,50.194613593],[8.807177374,50.194331082],[8.808156501,50.194357568],[8.808535741,50.194483373],[8.808566769,50.195030736],[8.807511794,50.195079291],[8.807463528,50.194659943],[8.806987754,50.194693049],[8.807036021,50.195105776],[8.806084474,50.195119019],[8.806053446,50.195120674],[8.806066458,50.1954443],[8.809445506,50.195375066],[8.809884543,50.195180295],[8.810026486,50.194281464],[8.811336651,50.19450453],[8.813799763,50.19498559],[8.81421273,50.194139129],[8.808551508,50.193198345],[8.807942847,50.19309166],[8.807903828,50.19324307],[8.80756926,50.193203768],[8.807476799,50.192999299],[8.80676414,50.192829028],[8.805771268,50.192749873],[8.805782643,50.192651257],[8.805932587,50.192490091],[8.80572827,50.192432299],[8.805683159,50.192489048],[8.805294014,50.192379193],[8.805205775,50.192488248],[8.802747577,50.191804224],[8.80254337,50.192090975],[8.80266114,50.192140493],[8.802308262,50.192552046],[8.802135394,50.192557036],[8.802005512,50.192782266],[8.80165679,50.192850364],[8.801585507,50.192837912],[8.801712223,50.192714835],[8.802157343,50.191893049],[8.801903031,50.191690061],[8.801211848,50.191643086],[8.800528639,50.191657768],[8.800228955,50.191810488],[8.800063665,50.191972247],[8.800497351,50.192582416],[8.800285669,50.19268421],[8.800484873,50.192943469],[8.800676252,50.193105841],[8.800551772,50.19315741]],[[8.802746152,50.194322295],[8.802711552,50.194310282],[8.802169273,50.193533866],[8.802749629,50.193374498],[8.802903128,50.193620105],[8.802914421,50.19361685],[8.80353467,50.193432029],[8.803556131,50.193459215],[8.80355825,50.193462092],[8.803580569,50.193492383],[8.803585278,50.193490957],[8.803833249,50.193415238],[8.804206601,50.193977135],[8.804271196,50.194074441],[8.803228626,50.19445659],[8.803219321,50.194444423],[8.803161967,50.194462435],[8.802959745,50.194238152],[8.802746152,50.194322295]]]]}
+}]};
+
+
+
+
+    const geoLayer = L.geoJSON(geoJsonData, {
+        style: feature => {
+            if (feature.properties.dgn_phase === 2) {
+                return { stroke: false, fillColor: 'grey', fillOpacity: 0.5 };
+            } else {
+                return { stroke: false, fillColor: '#ED782B', fillOpacity: 0.4 };
+            }
+        }
+    });
+
+    geoLayer.addTo(map);
+    map.fitBounds(geoLayer.getBounds());
+
+    //button der auf ausgangskarte zurück zoomt auf karte bringen
+    const zoomFullExtentControl = L.Control.extend({
+        options: { position: 'topleft' },
+        onAdd: function () {
+            const container = L.DomUtil.create('div', 'custom-control');
+            container.innerHTML = '<i class="fas fa-home"></i>';
+            L.DomEvent.on(container, 'click', () => map.fitBounds(geoLayer.getBounds()));
+            return container;
+        }
+    });
+    map.addControl(new zoomFullExtentControl());
+
+    //legende button auf karte bringen
+    const legendControl = L.Control.extend({
+        options: { position: 'topleft' },
+        onAdd: function () {
+            const container = L.DomUtil.create('div', 'custom-control2');
+            container.innerHTML = '<i class="fas fa-list"></i>';
+            L.DomEvent.on(container, 'click', () => {
+                const legend = document.getElementById('legend');
+                legend.style.display = legend.style.display === 'none' ? 'block' : 'none';
+            });
+            return container;
+        }
+    });
+    map.addControl(new legendControl());
+    
+    const markerLayerGroup = L.layerGroup().addTo(map);
+
+    // Override the default marker with a gray circle
+    const geocoder = L.Control.geocoder({
+        defaultMarkGeocode: false // Disable default marker behavior
+    })
+        .on('markgeocode', function (e) {
+            // Clear existing markers
+            markerLayerGroup.clearLayers();
+
+            const latlng = e.geocode.center;
+
+            // Add a custom gray circle marker
+            const customMarker = L.divIcon({
+                className: 'custom-marker'
+            });
+
+            const marker = L.marker(latlng, { icon: customMarker });
+            markerLayerGroup.addLayer(marker);
+
+            // Zoom to the location
+            map.setView(latlng, 14);
+        })
+        .addTo(map);
+
+</script>
+</body>
+</html>
