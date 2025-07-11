@@ -1,0 +1,38 @@
+
+# CRS setzen, falls nicht vorhanden
+if gdf.crs is None:
+    gdf.set_crs("EPSG:4326", inplace=True)
+
+# Zielgröße des Rasters
+width = 2048
+height = 2048
+
+# Gemeinsame Bounds aller Features
+minx, miny, maxx, maxy = gdf.total_bounds
+transform = from_bounds(minx, miny, maxx, maxy, width, height)
+
+# Shapes mit tatsächlichem Phasenwert (z. B. 1, 2)
+shapes = [(geom, int(phase)) for geom, phase in zip(gdf.geometry, gdf['dgn_phase'])]
+
+# Rasterisieren
+raster = rasterize(
+    shapes,
+    out_shape=(height, width),
+    transform=transform,
+    fill=0,
+    dtype='uint8'
+)
+
+# GeoTIFF schreiben
+with rasterio.open(
+    "p_513_2.tif",
+    'w',
+    driver='GTiff',
+    height=height,
+    width=width,
+    count=1,
+    dtype='uint8',
+    crs=gdf.crs,
+    transform=transform
+) as dst:
+    dst.write(raster, 1)
