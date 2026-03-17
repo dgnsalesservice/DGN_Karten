@@ -137,11 +137,14 @@
         <div><span style="display:inline-block;width:20px; height:10px; background:#00143C; margin-right:5px;"></span>Ausbauphase 2: Interessenbekundung möglich</div>
     </div>
     <script>
-        const initialCoordinates = [50.0, 8.0];
-        const initialZoomLevel = 13;
-        const map = L.map('map',{
-        zoomControl: false //default zoom - + rausnehmen
-        }).setView(initialCoordinates, initialZoomLevel);
+    const bounds = [[{miny}, {minx}], [{maxy}, {maxx}]];
+    const map = L.map('map', {zoomControl: false});
+    map.fitBounds(bounds);
+        //const initialCoordinates = [50.0, 8.0];
+        //const initialZoomLevel = 13;
+        //const map = L.map('map',{
+        //zoomControl: false //default zoom - + rausnehmen
+        //}).setView(initialCoordinates, initialZoomLevel);
         //const grayscaleOSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         //attribution: '&copy; OpenStreetMap contributors',
         //maxZoom: 19, className: 'grayscale-tile'}).addTo(map);
