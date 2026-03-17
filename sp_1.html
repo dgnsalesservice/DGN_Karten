@@ -141,7 +141,7 @@
     const map = L.map('map', {zoomControl: false});
       map.fitBounds(bounds);
         const maptiler = L.tileLayer('https://api.maptiler.com/maps/basic/{z}/{x}/{y}.png?key=UrGMdlREnrfymuiwCa7d',
-        {attribution: '&copy; MapTiler https://maptiler.com', tileSize: 512, zoomOffset: -1, maxZoom: 20, className: 'grayscale-tiles'
+        {attribution: '<a href='https://www.maptiler.com/' target='_blank'><img src='https://api.maptiler.com/resources/logo.svg' alt='MapTiler logo' style='height:15px; vertical-align:middle;'></a> &copy; <a href='https://www.maptiler.com/copyright/' target='_blank'>MapTiler</a>',
         }).addTo(map);
         L.control.zoom({
             position: 'topleft'
