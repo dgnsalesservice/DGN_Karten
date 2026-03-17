@@ -10,23 +10,23 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        html, body {{
+        html, body {
             height: 100%;
             margin: 0;
-        }}
-        .leaflet-container {{
+        }
+        .leaflet-container {
             height: 100%;
             width: 100%;
             max-width: 100%;
             max-height: 100%;
-        }}
-        .leaflet-control-zoom {{
+        }
+        .leaflet-control-zoom {
             background: none !important;
             box-shadow: none !important;
             border: none !important;
-        }}
+        }
         /*+ und - button formatierung*/
-        .leaflet-control-zoom-in, .leaflet-control-zoom-out {{
+        .leaflet-control-zoom-in, .leaflet-control-zoom-out {
             background-color: white !important; /*hintergrundfarbe*/
             color: grey !important; /*button farbe*/
             border: none !important; /*keine umrandung*/
@@ -39,12 +39,12 @@
             font-weight: 20;
             font-family: 'Montserrat', sans-serif; /*dgn font*/
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /*schatten*/
-        }}
-        .leaflet-control-zoom-in:hover, .leaflet-control-zoom-out:hover {{
+        }
+        .leaflet-control-zoom-in:hover, .leaflet-control-zoom-out:hover {
             background-color: #f0f0f0 !important; /* hover maus effekt */
-        }}
+        }
         /*zurück zu ausgangskarte zoomen button formatieren*/
-        .custom-control {{
+        .custom-control {
             position: absolute;
             bottom: -40px;
             left:0px;
@@ -59,9 +59,9 @@
             width: 20px;
             height: 20px;
             color: grey
-        }}
+        }
         /*legenden button formatieren*/
-        .custom-control2 {{
+        .custom-control2 {
             position: absolute;
             bottom: -320px;
             left: 0px;
@@ -76,12 +76,12 @@
             width: 20px;
             height: 20px;
             color: grey
-        }}
-        .custom-control:hover, .custom-control2:hover {{
+        }
+        .custom-control:hover, .custom-control2:hover {
             background-color: #f0f0f0 !important;
-        }}
+        }
         /* formatieren suchen button */
-        .leaflet-control-geocoder-icon {{
+        .leaflet-control-geocoder-icon {
             background-color: white !important;
             color: grey !important;
             border: none !important;
@@ -95,20 +95,20 @@
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
             border-radius: 2px;
             cursor: pointer;
-        }}
-        .leaflet-control-geocoder-icon:hover {{
+        }
+        .leaflet-control-geocoder-icon:hover {
             background-color: #f0f0f0 !important;
-        }}
+        }
         /*formatieren grauer marker*/
-        .custom-marker {{
+        .custom-marker {
             width: 15px;
             height: 15px;
             background-color: grey;
             border-radius: 50%;
             border: 1px solid white;
-        }}
+        }
         /*legende formatieren*/
-        #legend {{
+        #legend {
             position: absolute;
             bottom: 80px;
             left: 55px;
@@ -119,14 +119,14 @@
             border-radius: 5px;
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
             font-family: 'Montserrat', sans-serif;
-        }}
-        #legend div {{
+        }
+        #legend div {
             font-size: 12px;
             line-height: 18px;
-        }}
-        .grayscale-tile {{
-        filter: grayscale(100%);
-        }}
+        }
+       .grayscale-tiles, .grayscale-tile {
+       filter: grayscale(100%) brightness(95%) contrast(1.1) !important;
+       -webkit-filter: grayscale(100%);}
     </style>
     <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
 </head>
@@ -137,21 +137,17 @@
         <div><span style="display:inline-block;width:20px; height:10px; background:#00143C; margin-right:5px;"></span>Ausbauphase 2: Interessenbekundung möglich</div>
     </div>
     <script>
-        const initialCoordinates = [50.0, 8.0];
-        const initialZoomLevel = 13;
-        const map = L.map('map',{
-        zoomControl: false //default zoom - + rausnehmen
-        }).setView(initialCoordinates, initialZoomLevel);
-        const grayscaleOSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; OpenStreetMap contributors',
-            maxZoom: 19,
-            className: 'grayscale-tile'
-        }).addTo(map);;
+    const bounds = [[50.3725187, 8.1216831], [50.3729053, 8.1222545]];
+    const map = L.map('map', {zoomControl: false});
+      map.fitBounds(bounds);
+        const maptiler = L.tileLayer('https://api.maptiler.com/maps/basic/{z}/{x}/{y}.png?key=UrGMdlREnrfymuiwCa7d',
+        {attribution: '&copy; MapTiler https://maptiler.com', tileSize: 512, zoomOffset: -1, maxZoom: 20, className: 'grayscale-tiles'
+        }).addTo(map);
         L.control.zoom({
             position: 'topleft'
         }).addTo(map);
         const geoJsonData = {"type": "FeatureCollection", "features": [{"type": "Feature", "geometry": {"type": "MultiPolygon", "coordinates": [[[[8.122002299, 50.3729053], [8.1222545, 50.3728146], [8.12198827, 50.372556988], [8.121948701, 50.3725187], [8.1216831, 50.3726213], [8.121717813, 50.372716341], [8.1218199, 50.3728061], [8.1218843, 50.3727838], [8.122002299, 50.3729053]]]]}, "properties": {"dgn_phase": 1}}]};
-        L.imageOverlay("output_tiles/sp_1844.png", [[50.3729053, 8.1216831], [50.3725187, 8.1222545]]).addTo(map);
+         L.imageOverlay("output_tiles/sp_1844.png", bounds).addTo(map);
         const zoomFullExtentControl = L.Control.extend({
             options: { position: 'topleft' },
             onAdd: function () {
@@ -187,7 +183,7 @@
                 });
                 const marker = L.marker(latlng, { icon: customMarker });
                 markerLayerGroup.addLayer(marker);
-                map.setView(latlng, 14);
+                map.fitBounds(bounds);//map.setView(latlng, 14);
             })
             .addTo(map);
     </script>
