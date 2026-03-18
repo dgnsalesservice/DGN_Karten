@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Karte sp_1808 </title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        .leaflet-container {
+            height: 100%;
+            width: 100%;
+            max-width: 100%;
+            max-height: 100%;
+        }
+        .leaflet-control-zoom {
+            background: none !important;
+            box-shadow: none !important;
+            border: none !important;
+        }
+        .leaflet-control-zoom-in, .leaflet-control-zoom-out {
+            background-color: white !important;
+            color: grey !important; 
+            border: none !important;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 15px; 
+            font-weight: 20;
+            font-family: 'Montserrat', sans-serif; 
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); 
+        }
+        .leaflet-control-zoom-in:hover, .leaflet-control-zoom-out:hover {
+            background-color: #f0f0f0 !important; 
+        }
+        .custom-control {
+            position: absolute;
+            bottom: -40px;
+            left:0px;
+            background: white;
+            padding: 5px;
+            border-radius: 2px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 20px;
+            height: 20px;
+            color: grey
+        }
+        .custom-control2 {
+            position: absolute;
+            bottom: -320px;
+            left: 0px;
+            background: white;
+            padding: 5px;
+            border-radius:2px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 20px;
+            height: 20px;
+            color: grey
+        }
+        .custom-control:hover, .custom-control2:hover {
+            background-color: #f0f0f0 !important;
+        }
+        .leaflet-control-geocoder-icon {
+            background-color: white !important;
+            color: grey !important;
+            border: none !important;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 15px;
+            font-family: 'Montserrat', sans-serif;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            border-radius: 2px;
+            cursor: pointer;
+        }
+        .leaflet-control-geocoder-icon:hover {
+            background-color: #f0f0f0 !important;
+        }
+        .custom-marker {
+            width: 15px;
+            height: 15px;
+            background-color: grey;
+            border-radius: 50%;
+            border: 1px solid white;
+        }
+        #legend {
+            position: absolute;
+            bottom: 80px;
+            left: 55px;
+            display: none;
+            z-index: 1000;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+            font-family: 'Montserrat', sans-serif;
+        }
+        #legend div {
+            font-size: 12px;
+            line-height: 18px;
+        }
+       .grayscale-tiles, .grayscale-tile {
+       filter: grayscale(100%) brightness(95%) contrast(1.1) !important;
+       -webkit-filter: grayscale(100%);}
+        //.grayscale-tile {
+        //filter: grayscale(100%);
+        }
+    </style>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+</head>
+<body>
+    <div id="map"></div>
+    <div id="legend">
+        <div><span style="display:inline-block; width:20px; height:10px; background:#FF7F00; margin-right:5px;"></span>Ausbauphase 1: Ausbau bei ausreichender Nachfrage</div>
+        <div><span style="display:inline-block;width:20px; height:10px; background:#00143C; margin-right:5px;"></span>Ausbauphase 2: Interessenbekundung möglich</div>
+    </div>
+    <script>
+    const bounds = [[48.850481388, 8.224675315], [48.867052319, 8.258872528]];
+    const map = L.map('map', {zoomControl: false});
+      map.fitBounds(bounds);
+        const maptiler = L.tileLayer('https://api.maptiler.com/maps/basic/{z}/{x}/{y}.png?key=UrGMdlREnrfymuiwCa7d',
+        {attribution: '&copy; MapTiler https://maptiler.com', tileSize: 512, zoomOffset: -1, maxZoom: 20, className: 'grayscale-tiles',
+        }).addTo(map);
+        L.control.zoom({
+            position: 'topleft'
+        }).addTo(map);
+        const geoJsonData = {"type": "FeatureCollection", "features": [{"type": "Feature", "geometry": {"type": "MultiPolygon", "coordinates": [[[[8.241483742, 48.857671969], [8.241638907, 48.857860034], [8.242734536, 48.857497496], [8.243940985, 48.857028576], [8.244225324, 48.856911186], [8.244114715, 48.856791903], [8.243542842, 48.856974638], [8.242697889, 48.85726546], [8.241483742, 48.857671969]]]]}, "properties": {"dgn_phase": 1}}, {"type": "Feature", "geometry": {"type": "MultiPolygon", "coordinates": [[[[8.24349411, 48.854211438], [8.243592077, 48.854227411], [8.243703395, 48.854110271], [8.246014337, 48.853581629], [8.245816717, 48.853102567], [8.245940923, 48.853078234], [8.245898346, 48.852976745], [8.245153994, 48.851558928], [8.244189879, 48.850481388], [8.242332539, 48.851488038], [8.242474321, 48.851729067], [8.242523944, 48.852601024], [8.243473881, 48.853543872], [8.24349411, 48.854211438]]]]}, "properties": {"dgn_phase": 2}}, {"type": "Feature", "geometry": {"type": "MultiPolygon", "coordinates": [[[[8.225921925, 48.865969034], [8.225666139, 48.865874824], [8.225333392, 48.866277901], [8.224675315, 48.866917748], [8.225009147, 48.867052319], [8.225104572, 48.866956852], [8.225550071, 48.866385321], [8.225921925, 48.865969034]]]]}, "properties": {"dgn_phase": 1}}, {"type": "Feature", "geometry": {"type": "MultiPolygon", "coordinates": [[[[8.247748275, 48.86157778], [8.247507157, 48.861125939], [8.247803247, 48.861026456], [8.247363951, 48.860212272], [8.247775758, 48.860189734], [8.247756639, 48.860075022], [8.247372876, 48.860044561], [8.247004244, 48.860044561], [8.24595506, 48.860342303], [8.246904996, 48.861802654], [8.247748275, 48.86157778]]]]}, "properties": {"dgn_phase": 1}}, {"type": "Feature", "geometry": {"type": "MultiPolygon", "coordinates": [[[[8.233609017, 48.860512606], [8.23582631, 48.859975924], [8.236002672, 48.859921133], [8.237997618, 48.859187633], [8.240386781, 48.858309187], [8.241333635, 48.857961048], [8.241638907, 48.857860034], [8.241483742, 48.857671969], [8.240988879, 48.857864045], [8.238912641, 48.858669914], [8.238490856, 48.858833626], [8.236950795, 48.859414661], [8.23654885, 48.859566308], [8.235540064, 48.859909802], [8.234632556, 48.860182713], [8.234278923, 48.860256335], [8.233505429, 48.860417369], [8.233228003, 48.860464996], [8.233018596, 48.860480566], [8.23159347, 48.860633334], [8.230466235, 48.860668865], [8.229721268, 48.860648988], [8.229703025, 48.860856656], [8.229636949, 48.861564849], [8.229476555, 48.861878357], [8.229290814, 48.862208253], [8.228836706, 48.862691989], [8.228172429, 48.863297665], [8.227368044, 48.86403775], [8.227011798, 48.86435698], [8.227039127, 48.864378832], [8.226842379, 48.864428744], [8.226804364, 48.864425249], [8.22665146, 48.864534205], [8.226698966, 48.864708371], [8.225678644, 48.865859676], [8.225666139, 48.865874824], [8.225921925, 48.865969034], [8.226912338, 48.864785964], [8.227109221, 48.86471195], [8.227207716, 48.864508547], [8.227392536, 48.864239908], [8.227562881, 48.864096591], [8.228181487, 48.863524555], [8.228988341, 48.862785722], [8.229321976, 48.862466749], [8.229536609, 48.862216519], [8.229834827, 48.861588522], [8.229959334, 48.861160531], [8.230051978, 48.860846568], [8.230105278, 48.860807188], [8.230180729, 48.860796102], [8.23041164, 48.860792677], [8.230813347, 48.8607788], [8.231461072, 48.860758284], [8.232023613, 48.860728919], [8.233102033, 48.860603643], [8.233609017, 48.860512606]]]]}, "properties": {"dgn_phase": 1}}, {"type": "Feature", "geometry": {"type": "MultiPolygon", "coordinates": [[[[8.245898346, 48.852976745], [8.245940923, 48.853078234], [8.245816717, 48.853102567], [8.246014337, 48.853581629], [8.243703395, 48.854110271], [8.243592077, 48.854227411], [8.24349411, 48.854211438], [8.243495148, 48.854245691], [8.243048535, 48.854316582], [8.243339188, 48.854585967], [8.242920933, 48.854784462], [8.244345837, 48.856294436], [8.24386378, 48.856521287], [8.244114715, 48.856791903], [8.244225324, 48.856911186], [8.24440964, 48.856854474], [8.245324131, 48.856712692], [8.246424211, 48.856709792], [8.246798661, 48.857187661], [8.247160134, 48.857065301], [8.247628083, 48.857605917], [8.247138936, 48.858052529], [8.247883291, 48.858881952], [8.248181032, 48.858959932], [8.248223567, 48.859229317], [8.24789038, 48.859534147], [8.247225851, 48.859794969], [8.247372876, 48.860044561], [8.247756639, 48.860075022], [8.247775758, 48.860189734], [8.247986063, 48.860291699], [8.24824735, 48.86020248], [8.248342449, 48.860240347], [8.248776515, 48.860413193], [8.248954605, 48.860528953], [8.249060079, 48.86059751], [8.249003365, 48.860051651], [8.25020851, 48.860469906], [8.250414093, 48.860250145], [8.249634293, 48.859924047], [8.249917857, 48.859583771], [8.249294017, 48.859243495], [8.249634293, 48.858860684], [8.252285611, 48.859938225], [8.252710957, 48.859484523], [8.252716045, 48.859329725], [8.252796025, 48.856897008], [8.252640065, 48.855628062], [8.253022876, 48.855287787], [8.251420742, 48.854897887], [8.250938685, 48.854621413], [8.247613905, 48.852154412], [8.247195649, 48.852466331], [8.247259452, 48.852827875], [8.245898346, 48.852976745]]]]}, "properties": {"dgn_phase": 1}}, {"type": "Feature", "geometry": {"type": "MultiPolygon", "coordinates": [[[[8.252042398, 48.853351638], [8.251650466, 48.853663909], [8.25209338, 48.853912451], [8.25246938, 48.853577874], [8.252848567, 48.853214621], [8.252839007, 48.853163637], [8.25238016, 48.852985197], [8.252042398, 48.853351638]]]]}, "properties": {"dgn_phase": 2}}, {"type": "Feature", "geometry": {"type": "MultiPolygon", "coordinates": [[[[8.248954605, 48.860528953], [8.248776515, 48.860413193], [8.248342449, 48.860240347], [8.24824735, 48.86020248], [8.247986063, 48.860291699], [8.247775758, 48.860189734], [8.247363951, 48.860212272], [8.247803247, 48.861026456], [8.247507157, 48.861125939], [8.247748275, 48.86157778], [8.24815058, 48.861460791], [8.24842153, 48.86132945], [8.248572552, 48.86118782], [8.248588621, 48.861077003], [8.248664552, 48.860817622], [8.248630163, 48.860548015], [8.248954605, 48.860528953]]]]}, "properties": {"dgn_phase": 2}}, {"type": "Feature", "geometry": {"type": "MultiPolygon", "coordinates": [[[[8.256815965, 48.861124012], [8.257240513, 48.860522472], [8.257278313, 48.860537514], [8.257731783, 48.860788784], [8.258872528, 48.859839225], [8.258190629, 48.859335768], [8.255794429, 48.859998547], [8.254494361, 48.861336851], [8.256004733, 48.861693733], [8.256815965, 48.861124012]]]]}, "properties": {"dgn_phase": 2}}, {"type": "Feature", "geometry": {"type": "MultiPolygon", "coordinates": [[[[8.252716045, 48.859329725], [8.252710957, 48.859484523], [8.253920804, 48.859778683], [8.254277684, 48.860033598], [8.256865072, 48.859402683], [8.256259649, 48.858829124], [8.25557775, 48.859071294], [8.253990905, 48.85963848], [8.252716045, 48.859329725]]]]}, "properties": {"dgn_phase": 2}}]};
+         L.imageOverlay("output_tiles/sp_1808.png", bounds).addTo(map);
+        const zoomFullExtentControl = L.Control.extend({
+            options: { position: 'topleft' },
+            onAdd: function () {
+                const container = L.DomUtil.create('div', 'custom-control');
+                container.innerHTML = '<i class="fas fa-home"></i>';
+                L.DomEvent.on(container, 'click', () => map.setView(initialCoordinates, initialZoomLevel));
+                return container;
+            }
+        });
+        map.addControl(new zoomFullExtentControl());
+        const legendControl = L.Control.extend({
+            options: { position: 'topleft' },
+            onAdd: function () {
+                const container = L.DomUtil.create('div', 'custom-control2');
+                container.innerHTML = '<i class="fas fa-list"></i>';
+                L.DomEvent.on(container, 'click', () => {
+                    const legend = document.getElementById('legend');
+                    legend.style.display = legend.style.display === 'none' ? 'block' : 'none';
+                });
+                return container;
+            }
+        });
+        map.addControl(new legendControl());
+        const markerLayerGroup = L.layerGroup().addTo(map);
+        const geocoder = L.Control.geocoder({
+            defaultMarkGeocode: false //default rausnehmen
+        })
+            .on('markgeocode', function (e) {
+                markerLayerGroup.clearLayers();
+                const latlng = e.geocode.center;
+                const customMarker = L.divIcon({
+                    className: 'custom-marker'
+                });
+                const marker = L.marker(latlng, { icon: customMarker });
+                markerLayerGroup.addLayer(marker);
+                map.fitBounds(bounds);//map.setView(latlng, 14);
+            })
+            .addTo(map);
+    </script>
+</body>
+</html>
