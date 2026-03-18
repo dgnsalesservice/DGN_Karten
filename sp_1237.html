@@ -150,7 +150,7 @@
             onAdd: function () {
                 const container = L.DomUtil.create('div', 'custom-control');
                 container.innerHTML = '<i class="fas fa-home"></i>';
-                L.DomEvent.on(container, 'click', () => map.setView(initialCoordinates, initialZoomLevel));
+                L.DomEvent.on(container, 'click', () => map.fitBounds(bounds));
                 return container;
             }
         });
@@ -170,7 +170,7 @@
         map.addControl(new legendControl());
         const markerLayerGroup = L.layerGroup().addTo(map);
         const geocoder = L.Control.geocoder({
-            defaultMarkGeocode: false //default rausnehmen
+            defaultMarkGeocode: false
         })
             .on('markgeocode', function (e) {
                 markerLayerGroup.clearLayers();
@@ -180,7 +180,7 @@
                 });
                 const marker = L.marker(latlng, { icon: customMarker });
                 markerLayerGroup.addLayer(marker);
-                map.fitBounds(bounds);//map.setView(latlng, 14);
+                map.fitBounds(bounds);
             })
             .addTo(map);
     </script>
