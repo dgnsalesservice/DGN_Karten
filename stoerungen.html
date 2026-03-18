@@ -154,6 +154,15 @@
                 return container;
             }
         });
+       const geoLayer = L.geoJSON(geoJsonData);
+       const highlightLayer = L.layerGroup().addTo(map);
+       geoLayer.eachLayer(function(layer) {
+       if (layer.getBounds) {
+       const center = layer.getBounds().getCenter();
+       const marker = L.circleMarker(center, {radius: 6, color: 'red', fillColor: 'red', fillOpacity: 1
+       });
+       highlightLayer.addLayer(marker);}
+       });
         map.addControl(new zoomFullExtentControl());
         const legendControl = L.Control.extend({
             options: { position: 'topleft' },
