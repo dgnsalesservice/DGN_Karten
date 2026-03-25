@@ -141,7 +141,6 @@
         L.control.zoom({
             position: 'topleft'
         }).addTo(map);
-        const geoJsonData = {"type": "FeatureCollection", "features": [{"type": "Feature", "geometry": {"type": "MultiPolygon", "coordinates": [[[[7.895671726, 51.566650472], [7.896366748, 51.566621811], [7.896160296, 51.565871839], [7.898738849, 51.565998239], [7.8986141, 51.564996453], [7.897908334, 51.564369734], [7.897593489, 51.56378502], [7.897571001, 51.563245284], [7.895831852, 51.563410203], [7.896056742, 51.56445969], [7.894624942, 51.565175589], [7.895648191, 51.566622381], [7.895671726, 51.566650472]]]]}, "properties": {"dgn_phase": 2}}]};
          L.imageOverlay("output_tiles/sp_1116.png", bounds).addTo(map);
         const zoomFullExtentControl = L.Control.extend({
             options: { position: 'topleft' },
