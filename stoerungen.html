@@ -187,7 +187,7 @@
  L.geoJSON(geoJsonData, {
  onEachFeature: function (feature, layer) {
  if (feature.properties) {
- layer.bindPopup("<b>Störung in:</b> " + (feature.properties.impact_category || "Unbekannt"));
+ layer.bindPopup("<b>Störung:</b> " + (feature.properties.impact_category || "Unbekannt"));
  }}, style: { color: "#FF7F00", weight: 3 }
  }).addTo(map);
  </script>
