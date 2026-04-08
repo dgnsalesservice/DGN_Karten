@@ -104,8 +104,8 @@
  }
  #legend {
  position: absolute;
- bottom: 80px;
- left: 55px;
+ top: 160px;
+ left: 10px;
  display: none;
  z-index: 1000;
  background: white;
@@ -142,8 +142,7 @@
  L.control.zoom({
  position: 'topleft'
  }).addTo(map);
- L.imageOverlay("output_tiles/alle.png", bounds).addTo(map);
- //L.imageOverlay("output_tiles/stoerungen2.png", bounds).addTo(map);
+ L.imageOverlay("output_tiles/allestoerungen.png", bounds).addTo(map);
  const zoomFullExtentControl = L.Control.extend({
  options: { position: 'topleft' },
  onAdd: function () {
@@ -182,12 +181,6 @@
  map.fitBounds(bounds);
  })
  .addTo(map);
- L.geoJSON(geoJsonData, {
- onEachFeature: function (feature, layer) {
- if (feature.properties) {
- layer.bindPopup("<b>Störung:</b> " + (feature.properties.impact_category || "Unbekannt"));
- }}, style: { color: "#FF7F00", weight: 3 }
- }).addTo(map);
  </script>
 </body>
 </html>
