@@ -135,7 +135,7 @@
  <script>
  const bounds = [[50.140015555, 7.929725385], [53.202405457, 8.62410379]];
  const map = L.map('map', {zoomControl: false});
- map.fitBounds(bounds, {padding: [-50, -50]});
+ map.fitBounds(bounds);
  const maptiler = L.tileLayer('https://api.maptiler.com/maps/basic/{z}/{x}/{y}.png?key=UrGMdlREnrfymuiwCa7d',
  {attribution: '&copy; MapTiler https://maptiler.com', tileSize: 512, zoomOffset: -1, maxZoom: 20, className: 'grayscale-tiles',
  }).addTo(map);
