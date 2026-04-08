@@ -6,8 +6,6 @@
     <title>Karte p_115 </title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <style>
         html, body {
@@ -75,24 +73,6 @@
             color: grey
         }
         .custom-control:hover, .custom-control2:hover {
-            background-color: #f0f0f0 !important;
-        }
-        .leaflet-control-geocoder-icon {
-            background-color: white !important;
-            color: grey !important;
-            border: none !important;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 15px;
-            font-family: 'Montserrat', sans-serif;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-            border-radius: 2px;
-            cursor: pointer;
-        }
-        .leaflet-control-geocoder-icon:hover {
             background-color: #f0f0f0 !important;
         }
         .custom-marker {
@@ -167,20 +147,6 @@
         });
         map.addControl(new legendControl());
         const markerLayerGroup = L.layerGroup().addTo(map);
-        const geocoder = L.Control.geocoder({
-            defaultMarkGeocode: false
-        })
-            .on('markgeocode', function (e) {
-                markerLayerGroup.clearLayers();
-                const latlng = e.geocode.center;
-                const customMarker = L.divIcon({
-                    className: 'custom-marker'
-                });
-                const marker = L.marker(latlng, { icon: customMarker });
-                markerLayerGroup.addLayer(marker);
-                map.fitBounds(bounds);
-            })
-            .addTo(map);
     </script>
 </body>
 </html>
