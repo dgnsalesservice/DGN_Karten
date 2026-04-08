@@ -168,7 +168,7 @@
  map.addControl(new legendControl());
  const markerLayerGroup = L.layerGroup().addTo(map);
  const geocoder = L.Control.geocoder({
- defaultMarkGeocode: false
+ defaultMarkGeocode: true
  })
  .on('markgeocode', function (e) {
  markerLayerGroup.clearLayers();
