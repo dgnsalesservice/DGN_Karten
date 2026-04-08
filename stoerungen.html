@@ -168,7 +168,7 @@
  map.addControl(new legendControl());
  const markerLayerGroup = L.layerGroup().addTo(map);
  const geocoder = L.Control.geocoder({
- defaultMarkGeocode: true
+ defaultMarkGeocode: false
  })
  .on('markgeocode', function (e) {
  markerLayerGroup.clearLayers();
@@ -178,7 +178,7 @@
  });
  const marker = L.marker(latlng, { icon: customMarker });
  markerLayerGroup.addLayer(marker);
- map.fitBounds(bounds);
+ map.setView(e.geocode.center, 16); //map.fitBounds(bounds);
  })
  .addTo(map);
  </script>
