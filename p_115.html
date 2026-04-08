@@ -149,20 +149,6 @@
         });
         map.addControl(new legendControl());
         const markerLayerGroup = L.layerGroup().addTo(map);
-        const geocoder = L.Control.geocoder({
-            defaultMarkGeocode: false
-        })
-            .on('markgeocode', function (e) {
-                markerLayerGroup.clearLayers();
-                const latlng = e.geocode.center;
-                const customMarker = L.divIcon({
-                    className: 'custom-marker'
-                });
-                const marker = L.marker(latlng, { icon: customMarker });
-                markerLayerGroup.addLayer(marker);
-                map.fitBounds(bounds);
-            })
-            .addTo(map);
     </script>
 </body>
 </html>
