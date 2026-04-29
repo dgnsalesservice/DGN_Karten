@@ -88,7 +88,7 @@
             position: absolute;
             top: 160px;
             left: 10px;
-            display: none;
+            display: block;
             z-index: 1000;
             background: white;
             padding: 10px;
@@ -135,19 +135,6 @@
             }
         });
         map.addControl(new zoomFullExtentControl());
-        const legendControl = L.Control.extend({
-            options: { position: 'topleft' },
-            onAdd: function () {
-                const container = L.DomUtil.create('div', 'custom-control2');
-                container.innerHTML = '<i class="fas fa-list"></i>';
-                L.DomEvent.on(container, 'click', () => {
-                    const legend = document.getElementById('legend');
-                    legend.style.display = legend.style.display === 'none' ? 'block' : 'none';
-                });
-                return container;
-            }
-        });
-        map.addControl(new legendControl());
         const markerLayerGroup = L.layerGroup().addTo(map);
     </script>
 </body>
