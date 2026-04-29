@@ -87,7 +87,7 @@
         #legend {
             position: absolute;
             bottom: 20px;
-            left: 50%;
+            left: 40%;
             display: block;
             z-index: 1000;
             background: white;
@@ -117,7 +117,7 @@
     <script>
     const bounds = [[51.134931546, 6.350935266], [51.151211239, 6.40063737]];
     const map = L.map('map', {zoomControl: false});
-      map.fitBounds(bounds);
+      map.fitBounds(bounds, {padding: [50, 50]});
         const maptiler = L.tileLayer('https://api.maptiler.com/maps/basic/{z}/{x}/{y}.png?key=UrGMdlREnrfymuiwCa7d',
         {attribution: '&copy; MapTiler https://maptiler.com', tileSize: 512, zoomOffset: -1, maxZoom: 20, className: 'grayscale-tiles',
         }).addTo(map);
