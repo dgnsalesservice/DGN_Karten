@@ -21,14 +21,14 @@
             max-height: 100%;
         }
         .leaflet-control-zoom {
-            background: none !important;
-            box-shadow: none !important;
+            background: none;
+            box-shadow: none;
             border: none !important;
         }
         .leaflet-control-zoom-in, .leaflet-control-zoom-out {
-            background-color: white !important;
-            color: grey !important; 
-            border: none !important;
+            background-color: white;
+            color: grey; 
+            border: none;
             width: 30px;
             height: 30px;
             display: flex;
@@ -40,7 +40,7 @@
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); 
         }
         .leaflet-control-zoom-in:hover, .leaflet-control-zoom-out:hover {
-            background-color: #f0f0f0 !important; 
+            background-color: #f0f0f0; 
         }
         .custom-control {
             position: absolute;
@@ -86,9 +86,9 @@
         }
         #legend {
             position: absolute;
-            top: 160px;
-            left: 10px;
-            display: none;
+            top: 20px;
+            left: 60px;
+            display: block;
             z-index: 1000;
             background: white;
             padding: 10px;
@@ -117,7 +117,7 @@
     <script>
     const bounds = [[49.1977957, 9.4717609], [49.2051873, 9.485422833]];
     const map = L.map('map', {zoomControl: false});
-      map.fitBounds(bounds);
+      map.fitBounds(bounds, {padding: [100, 100]});
         const maptiler = L.tileLayer('https://api.maptiler.com/maps/basic/{z}/{x}/{y}.png?key=UrGMdlREnrfymuiwCa7d',
         {attribution: '&copy; MapTiler https://maptiler.com', tileSize: 512, zoomOffset: -1, maxZoom: 20, className: 'grayscale-tiles',
         }).addTo(map);
@@ -135,19 +135,6 @@
             }
         });
         map.addControl(new zoomFullExtentControl());
-        const legendControl = L.Control.extend({
-            options: { position: 'topleft' },
-            onAdd: function () {
-                const container = L.DomUtil.create('div', 'custom-control2');
-                container.innerHTML = '<i class="fas fa-list"></i>';
-                L.DomEvent.on(container, 'click', () => {
-                    const legend = document.getElementById('legend');
-                    legend.style.display = legend.style.display === 'none' ? 'block' : 'none';
-                });
-                return container;
-            }
-        });
-        map.addControl(new legendControl());
         const markerLayerGroup = L.layerGroup().addTo(map);
     </script>
 </body>
