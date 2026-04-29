@@ -21,14 +21,14 @@
             max-height: 100%;
         }
         .leaflet-control-zoom {
-            background: none !important;
-            box-shadow: none !important;
+            background: none;
+            box-shadow: none;
             border: none !important;
         }
         .leaflet-control-zoom-in, .leaflet-control-zoom-out {
-            background-color: white !important;
-            color: grey !important; 
-            border: none !important;
+            background-color: white;
+            color: grey; 
+            border: none;
             width: 30px;
             height: 30px;
             display: flex;
@@ -40,7 +40,7 @@
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); 
         }
         .leaflet-control-zoom-in:hover, .leaflet-control-zoom-out:hover {
-            background-color: #f0f0f0 !important; 
+            background-color: #f0f0f0; 
         }
         .custom-control {
             position: absolute;
@@ -86,8 +86,8 @@
         }
         #legend {
             position: absolute;
-            top: 160px;
-            left: 10px;
+            top: 20px;
+            left: 60px;
             display: block;
             z-index: 1000;
             background: white;
@@ -117,7 +117,7 @@
     <script>
     const bounds = [[51.303729599, 10.946684975], [51.42836839, 11.110872677]];
     const map = L.map('map', {zoomControl: false});
-      map.fitBounds(bounds);
+      map.fitBounds(bounds, {padding: [100, 100]});
         const maptiler = L.tileLayer('https://api.maptiler.com/maps/basic/{z}/{x}/{y}.png?key=UrGMdlREnrfymuiwCa7d',
         {attribution: '&copy; MapTiler https://maptiler.com', tileSize: 512, zoomOffset: -1, maxZoom: 20, className: 'grayscale-tiles',
         }).addTo(map);
