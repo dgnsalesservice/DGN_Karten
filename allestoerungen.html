@@ -142,7 +142,7 @@
  L.control.zoom({
  position: 'topleft'
  }).addTo(map);
- L.imageOverlay("output_tiles/allestoerungen.png", bounds{opacity: 1,crossOrigin: true}).addTo(map);
+ L.imageOverlay("output_tiles/allestoerungen.png", bounds).addTo(map);
  const zoomFullExtentControl = L.Control.extend({
  options: { position: 'topleft' },
  onAdd: function () {
