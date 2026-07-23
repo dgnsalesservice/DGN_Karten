@@ -157,19 +157,6 @@ overlays.forEach(o => {L.imageOverlay(o.png,o.bounds
  }
  });
  map.addControl(new zoomFullExtentControl());
- const legendControl = L.Control.extend({
- options: { position: 'topleft' },
- onAdd: function () {
- const container = L.DomUtil.create('div', 'custom-control2');
- container.innerHTML = '<i class="fas fa-list"></i>';
- L.DomEvent.on(container, 'click', () => {
- const legend = document.getElementById('legend');
- legend.style.display = legend.style.display === 'none' ? 'block' : 'none';
- });
- return container;
- }
- });
- map.addControl(new legendControl());
  const geocoder = L.Control.geocoder({
  defaultMarkGeocode: false})
  .on('markgeocode', function (e) {
