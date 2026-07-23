@@ -151,9 +151,7 @@ const overlays = [{
  const container = L.DomUtil.create('div', 'custom-control');
  container.innerHTML = '<i class="fas fa-home"></i>';
  L.DomEvent.on(container, 'click', () => map.fitBounds(bounds));
- return container;
- }
- });
+ return container;}});
  map.addControl(new zoomFullExtentControl());
  const legendControl = L.Control.extend({
  options: { position: 'topleft' },
