@@ -157,6 +157,22 @@ overlays.forEach(o => {L.imageOverlay(o.png,o.bounds
  }
  });
  map.addControl(new zoomFullExtentControl());
+            var viewControl = L.Control.extend({
+    options: {
+        position: 'bottomleft'
+    },
+   onAdd: function(map) {
+    var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
+        var button = L.DomUtil.create('a', '', container);
+        button.innerHTML = 'DE'; 
+        button.title = 'Störungsgebiet anzeigen';
+        button.onclick = function() {
+            map.setView([51.1657, 10.4515], 6);
+        };
+        return container;
+    }
+});
+map.addControl(new viewControl());
  const geocoder = L.Control.geocoder({
  defaultMarkGeocode: false})
  .on('markgeocode', function (e) {
