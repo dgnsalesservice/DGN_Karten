@@ -134,6 +134,7 @@
  </div>
  <script>
  const map = L.map('map', {zoomControl: false});
+map.fitBounds(Bounds);
  const maptiler = L.tileLayer('https://api.maptiler.com/maps/basic/{z}/{x}/{y}.png?key=hP74ooTG3ciBab5RShCg',
  {attribution: '&copy; MapTiler https://maptiler.com', tileSize: 512, zoomOffset: -1, maxZoom: 20, className: 'grayscale-tiles',
  }).addTo(map);
@@ -143,14 +144,6 @@
 const overlays = [{"png": "output_tiles/stoerung_69.png", "bounds": [[53.170185132, 8.528619404], [53.202405457, 8.62410379]]}, {"png": "output_tiles/stoerung_1700.png", "bounds": [[51.903608425, 10.473915547], [51.938739487, 10.526463816]]}, {"png": "output_tiles/stoerung_1701.png", "bounds": [[51.94257995, 10.377482767], [51.958676672, 10.428263919]]}, {"png": "output_tiles/stoerung_162.png", "bounds": [[50.140015555, 7.929725385], [50.221578332, 8.022248931]]}];
 overlays.forEach(o => {L.imageOverlay(o.png,o.bounds
 ).addTo(map);});
-const overlays = [{"png": "output_tiles/stoerung_69.png", "bounds": [[53.170185132, 8.528619404], [53.202405457, 8.62410379]]}, {"png": "output_tiles/stoerung_1700.png", "bounds": [[51.903608425, 10.473915547], [51.938739487, 10.526463816]]}, {"png": "output_tiles/stoerung_1701.png", "bounds": [[51.94257995, 10.377482767], [51.958676672, 10.428263919]]}, {"png": "output_tiles/stoerung_162.png", "bounds": [[50.140015555, 7.929725385], [50.221578332, 8.022248931]]}];
-let allBounds = [];
-overlays.forEach(o => {
-    L.imageOverlay(o.png, o.bounds, {opacity:0.7}).addTo(map);
-    allBounds.push(o.bounds[0]);
-    allBounds.push(o.bounds[1]);
-});
-map.fitBounds(allBounds);
  const zoomFullExtentControl = L.Control.extend({
  options: { position: 'topleft' },
  onAdd: function () {
