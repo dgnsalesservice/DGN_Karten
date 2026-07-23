@@ -142,6 +142,9 @@
  L.control.zoom({
  position: 'topleft'
  }).addTo(map);
+const overlays = {OVERLAY_JSON};
+overlays.forEach(o => {L.imageOverlay(o.png,o.bounds
+).addTo(map);});
  const zoomFullExtentControl = L.Control.extend({
  options: { position: 'topleft' },
  onAdd: function () {
