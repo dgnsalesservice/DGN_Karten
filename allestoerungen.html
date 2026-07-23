@@ -142,11 +142,9 @@
  L.control.zoom({
  position: 'topleft'
  }).addTo(map);
-const overlayLayers = overlays.map(o => {
-return L.imageOverlay(o.png, o.bounds, {opacity: 0.7}).addTo(map);
-});
-const allOverlays = L.featureGroup(overlayLayers);
-map.fitBounds(allOverlays.getBounds(), {padding: [50, 50]});
+const overlays = [{"png": "output_tiles/stoerung_69.png", "bounds": [[53.170185132, 8.528619404], [53.202405457, 8.62410379]]}, {"png": "output_tiles/stoerung_1700.png", "bounds": [[51.903608425, 10.473915547], [51.938739487, 10.526463816]]}, {"png": "output_tiles/stoerung_1701.png", "bounds": [[51.94257995, 10.377482767], [51.958676672, 10.428263919]]}, {"png": "output_tiles/stoerung_162.png", "bounds": [[50.140015555, 7.929725385], [50.221578332, 8.022248931]]}];
+overlays.forEach(o => {L.imageOverlay(o.png,o.bounds
+).addTo(map);});
  const zoomFullExtentControl = L.Control.extend({
  options: { position: 'topleft' },
  onAdd: function () {
