@@ -31,7 +31,6 @@
  border: none !important;
  width: 30px;
  height: 30px;
- display: flex;
  justify-content: center;
  align-items: center;
  font-size: 15px; 
@@ -150,8 +149,6 @@ overlays.forEach(o => {L.imageOverlay(o.png,o.bounds
  options: { position: 'topleft' },
  onAdd: function () {
  const container = L.DomUtil.create('div', 'custom-control');
-container.style.marginTop = '80px'
-container.style.marginRight = '100px'
  container.innerHTML = '<i class="fas fa-home"></i>';
  L.DomEvent.on(container, 'click', () => map.fitBounds(bounds));
  return container;}});
@@ -161,8 +158,7 @@ const viewControl = L.Control.extend({
 options: {position: 'topleft'},
 onAdd: function(map) {
 const container = L.DomUtil.create('div','leaflet-bar leaflet-control');
-container.style.marginTop = '90px'
-container.style.marginLeft = '30px'
+container.style.marginTop = '45px'
 stoerungen.forEach(function(stoerung){
 const button = L.DomUtil.create('a','',container);
 button.style.width = "200px";
