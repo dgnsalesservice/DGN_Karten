@@ -164,11 +164,11 @@ onAdd: function(map) {
 const container = L.DomUtil.create('div','leaflet-bar leaflet-control');
 stoerungen.forEach(function(stoerung){
 const button = L.DomUtil.create('a','',container);
-button.style.width = "80px";
-button.style.height = "30px";
+button.style.width = "150px";
+button.style.height = "50px";
 button.style.lineHeight = "30px";
 button.style.textAlign = "center";
-button.style.fontSize = "12px";
+button.style.fontSize = "13px";
 button.innerHTML = stoerung.name;
 button.title =
     "Störung in " + {stoerung}.name;
