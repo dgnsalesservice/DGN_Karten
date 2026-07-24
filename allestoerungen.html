@@ -186,6 +186,7 @@ map.addControl(new viewControl());
  .on('markgeocode', function (e) {
  map.setView(e.geocode.center, 16);})
  .addTo(map)
+const center = stoerung.bounds.getCenter();
 const stoerungsMarker = L.layerGroup();
 stoerungen.forEach(function(stoerung){
     L.marker(stoerung.center, {
