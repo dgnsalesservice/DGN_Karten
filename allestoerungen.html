@@ -150,6 +150,8 @@ overlays.forEach(o => {L.imageOverlay(o.png,o.bounds
  const zoomFullExtentControl = L.Control.extend({
  onAdd: function () {
  const container = L.DomUtil.create('div', 'custom-control');
+container.style.marginTop = '80px'
+container.style.marginLeft = '10px'
  container.innerHTML = '<i class="fas fa-home"></i>';
  L.DomEvent.on(container, 'click', () => map.fitBounds(bounds));
  return container;
@@ -158,7 +160,7 @@ overlays.forEach(o => {L.imageOverlay(o.png,o.bounds
  map.addControl(new zoomFullExtentControl());
 const stoerungen = [{"name": "Blumenthal", "bounds": [[53.170185132, 8.528619404], [53.202405457, 8.62410379]]}, {"name": "Laufenselden", "bounds": [[50.140015555, 7.929725385], [50.221578332, 8.022248931]]}, {"name": "Oker", "bounds": [[51.903608425, 10.473915547], [51.938739487, 10.526463816]]}, {"name": "Jerstedt", "bounds": [[51.94257995, 10.377482767], [51.958676672, 10.428263919]]}];
 const viewControl = L.Control.extend({
-options: {position: 'bottomleft'},
+options: {position: 'topleft'},
 onAdd: function(map) {
 const container = L.DomUtil.create('div','leaflet-bar leaflet-control');
 container.style.marginTop = '90px'
@@ -176,7 +178,7 @@ button.onclick = function(){
     map.fitBounds(
         stoerung.bounds,
         {animate: true,
-         duration: 3.5           }
+         duration: 2.5           }
     );};});
 return container;}});
 map.addControl(new viewControl());
