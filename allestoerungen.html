@@ -192,10 +192,10 @@ const center = [
     (stoerung.bounds[0][0] + stoerung.bounds[1][0]) / 2,
     (stoerung.bounds[0][1] + stoerung.bounds[1][1]) / 2
 ];
-    L.marker(stoerung.center, {
+    L.marker(center, {
         icon: L.divIcon({
             className: 'stoerungs-icon',
-            html: '⚠️',
+            html: '📍',
             iconSize: [30,30]
         })
     }).addTo(stoerungsMarker);
