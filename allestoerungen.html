@@ -156,6 +156,7 @@ overlays.forEach(o => {L.imageOverlay(o.png,o.bounds
  return container;
  }
  });
+ map.addControl(new zoomFullExtentControl());
 const stoerungen = [{"name": "Blumenthal, Laufenselden", "bounds": [[53.170185132, 8.528619404], [53.202405457, 8.62410379]]}, {"name": "Blumenthal, Laufenselden", "bounds": [[50.140015555, 7.929725385], [50.221578332, 8.022248931]]}, {"name": "Jerstedt", "bounds": [[51.903608425, 10.473915547], [51.938739487, 10.526463816]]}, {"name": "Oker", "bounds": [[51.94257995, 10.377482767], [51.958676672, 10.428263919]]}];
 const viewControl = L.Control.extend({
 options: {position: 'bottomleft'},
@@ -163,6 +164,11 @@ onAdd: function(map) {
 const container = L.DomUtil.create('div','leaflet-bar leaflet-control');
 stoerungen.forEach(function(stoerung){
 const button = L.DomUtil.create('a','',container);
+button.style.width = "80px";
+button.style.height = "30px";
+button.style.lineHeight = "30px";
+button.style.textAlign = "center";
+button.style.fontSize = "12px";
 button.innerHTML = stoerung.name;
 button.title =
     "Störung in " + {stoerung}.name;
