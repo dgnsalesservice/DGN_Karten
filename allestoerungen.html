@@ -43,6 +43,7 @@
  background-color: #f0f0f0 !important; 
  }
  .custom-control {
+ position: absolute;
  bottom: -40px;
  left:0px;
  background: white;
@@ -147,6 +148,7 @@ const overlays = [{"png": "output_tiles/stoerung_69.png", "bounds": [[53.1701851
 overlays.forEach(o => {L.imageOverlay(o.png,o.bounds
 ).addTo(map);});
  const zoomFullExtentControl = L.Control.extend({
+ options: { position: 'topleft' },
  onAdd: function () {
  const container = L.DomUtil.create('div', 'custom-control');
 container.style.marginTop = '80px'
