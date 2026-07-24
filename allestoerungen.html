@@ -65,7 +65,7 @@
  background: none !important;
  box-shadow: none !important;
  border: none !important;
-margin-bottom: 5px !important;
+margin-bottom: 10px !important;
  }
  .leaflet-control-zoom-in, .leaflet-control-zoom-out {
  background-color: white !important;
@@ -205,7 +205,7 @@ onAdd: function(map) {
 const container = L.DomUtil.create('div', 'leaflet-control-custom-st');
 stoerungen.forEach(function(stoerung){
 const button = L.DomUtil.create('a','',container);
-button.style.width = "180px";
+button.style.width = "190px";
 button.style.height = "40px";
 button.style.lineHeight = "40px";
 button.style.textAlign = "center";
