@@ -144,7 +144,7 @@ map.fitBounds(bounds);
  L.control.zoom({
  position: 'topleft'
  }).addTo(map);
-const overlays = [{"png": "output_tiles/stoerung_69.png", "bounds": [[53.170185132, 8.528619404], [53.202405457, 8.62410379]]}, {"png": "output_tiles/stoerung_1700.png", "bounds": [[51.903608425, 10.473915547], [51.938739487, 10.526463816]]}, {"png": "output_tiles/stoerung_1701.png", "bounds": [[51.94257995, 10.377482767], [51.958676672, 10.428263919]]}, {"png": "output_tiles/stoerung_162.png", "bounds": [[50.140015555, 7.929725385], [50.221578332, 8.022248931]]}];
+const overlays = [{"png": "output_tiles/stoerung_69.png", "bounds": [[53.170185132, 8.528619404], [53.202405457, 8.62410379]]}, {"png": "output_tiles/stoerung_162.png", "bounds": [[50.140015555, 7.929725385], [50.221578332, 8.022248931]]}, {"png": "output_tiles/stoerung_1700.png", "bounds": [[51.903608425, 10.473915547], [51.938739487, 10.526463816]]}, {"png": "output_tiles/stoerung_1701.png", "bounds": [[51.94257995, 10.377482767], [51.958676672, 10.428263919]]}];
 overlays.forEach(o => {L.imageOverlay(o.png,o.bounds
 ).addTo(map);});
  const zoomFullExtentControl = L.Control.extend({
@@ -172,6 +172,22 @@ overlays.forEach(o => {L.imageOverlay(o.png,o.bounds
         return container;
     }
 });
+map.addControl(new viewControl());
+const stoerungen = [{"name": "Blumenthal, Laufenselden", "bounds": [[53.170185132, 8.528619404], [53.202405457, 8.62410379]]}, {"name": "Blumenthal, Laufenselden", "bounds": [[50.140015555, 7.929725385], [50.221578332, 8.022248931]]}, {"name": "Jerstedt", "bounds": [[51.903608425, 10.473915547], [51.938739487, 10.526463816]]}, {"name": "Oker", "bounds": [[51.94257995, 10.377482767], [51.958676672, 10.428263919]]}];
+const viewControl = L.Control.extend({
+options: {position: 'bottomleft'},
+onAdd: function(map) {
+const container = L.DomUtil.create('div','leaflet-bar leaflet-control');
+stoerungen.forEach(function(stoerung){
+const button = L.DomUtil.create('a','',container);
+button.innerHTML = stoerung.name;
+button.title =
+    "Störung in " + {stoerung}.name;
+button.onclick = function(){
+    map.fitBounds(
+        stoerung.bounds
+    );};});
+return container;}});
 map.addControl(new viewControl());
  const geocoder = L.Control.geocoder({
  defaultMarkGeocode: false})
