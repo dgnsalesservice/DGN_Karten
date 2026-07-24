@@ -186,12 +186,23 @@ map.addControl(new viewControl());
  .on('markgeocode', function (e) {
  map.setView(e.geocode.center, 16);})
  .addTo(map)
-    map.on('zoomend', function() {
+const stoerungsMarker = L.layerGroup();
+stoerungen.forEach(function(stoerung){
+    L.marker(stoerung.center, {
+        icon: L.divIcon({
+            className: 'stoerungs-icon',
+            html: '⚠️',
+            iconSize: [30,30]
+        })
+    }).addTo(stoerungsMarker);
+});
+map.on('zoomend', function(){
     if (map.getZoom() < 10) {
         stoerungsMarker.addTo(map);
     } else {
         map.removeLayer(stoerungsMarker);
-    }});
+    }
+});
  </script>
 </body>
 </html>
