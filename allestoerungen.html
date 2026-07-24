@@ -192,16 +192,23 @@ const center = [
     (stoerung.bounds[0][0] + stoerung.bounds[1][0]) / 2,
     (stoerung.bounds[0][1] + stoerung.bounds[1][1]) / 2
 ];
-    L.marker(center, {
+ const marker =   L.marker(center, {
         icon: L.divIcon({
             className: 'stoerungs-icon',
             html: '📍',
             iconSize: [30,30]
         })
-    }).addTo(stoerungsMarker);
+    });
+marker.on('click', function(){
+    map.fitBounds(stoerung.bounds, {
+        animate: true,
+        duration: 2.5
+    });
+marker.addTo(stoerungsMarker);
+});
 });
 map.on('zoomend', function(){
-    if (map.getZoom() < 10) {
+    if (map.getZoom() < 8) {
         stoerungsMarker.addTo(map);
     } else {
         map.removeLayer(stoerungsMarker);
