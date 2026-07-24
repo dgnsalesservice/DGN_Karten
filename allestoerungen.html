@@ -20,6 +20,17 @@
     box-shadow: 0 1px 5px rgba(0,0,0,0.3);
     overflow: hidden;
     margin-top: 5px !important;
+    display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.leaflet-control-custom-st { 
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.3);
+    overflow: hidden;
+    margin-top: 5px !important;
+    display: flex;
    justify-content: center;
    align-items: center;
 }
@@ -183,7 +194,7 @@ const stoerungen = [{"name": "Blumenthal", "bounds": [[53.170185132, 8.528619404
 const viewControl = L.Control.extend({
 options: {position: 'topleft'},
 onAdd: function(map) {
-const container = L.DomUtil.create('div', 'leaflet-control-custom');
+const container = L.DomUtil.create('div', 'leaflet-control-custom-st');
 stoerungen.forEach(function(stoerung){
 const button = L.DomUtil.create('a','',container);
 button.style.width = "200px";
