@@ -151,12 +151,10 @@ overlays.forEach(o => {L.imageOverlay(o.png,o.bounds
  onAdd: function () {
  const container = L.DomUtil.create('div', 'custom-control');
 container.style.marginTop = '80px'
-container.style.marginLeft = '10px'
+container.style.marginRight = '100px'
  container.innerHTML = '<i class="fas fa-home"></i>';
  L.DomEvent.on(container, 'click', () => map.fitBounds(bounds));
- return container;
- }
- });
+ return container;}});
  map.addControl(new zoomFullExtentControl());
 const stoerungen = [{"name": "Blumenthal", "bounds": [[53.170185132, 8.528619404], [53.202405457, 8.62410379]]}, {"name": "Laufenselden", "bounds": [[50.140015555, 7.929725385], [50.221578332, 8.022248931]]}, {"name": "Oker", "bounds": [[51.903608425, 10.473915547], [51.938739487, 10.526463816]]}, {"name": "Jerstedt", "bounds": [[51.94257995, 10.377482767], [51.958676672, 10.428263919]]}];
 const viewControl = L.Control.extend({
