@@ -163,7 +163,7 @@ options: {position: 'topleft'},
 onAdd: function(map) {
 const container = L.DomUtil.create('div','leaflet-bar leaflet-control');
 container.style.marginTop = '100px'
-container.style.marginLeft = ''
+container.style.marginLeft = '20px'
 stoerungen.forEach(function(stoerung){
 const button = L.DomUtil.create('a','',container);
 button.style.width = "180px";
@@ -179,7 +179,7 @@ button.onclick = function(){
     map.fitBounds(
         stoerung.bounds,
         {animate: true,
-         duration: 2.5           }
+         duration: 3.5           }
     );};});
 return container;}});
 map.addControl(new viewControl());
