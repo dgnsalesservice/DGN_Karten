@@ -204,11 +204,11 @@ marker.on('click', function(){
         animate: true,
         duration: 2.5
     });
+});
 marker.addTo(stoerungsMarker);
 });
-});
 map.on('zoomend', function(){
-    if (map.getZoom() < 8) {
+    if (map.getZoom() < 10) {
         stoerungsMarker.addTo(map);
     } else {
         map.removeLayer(stoerungsMarker);
