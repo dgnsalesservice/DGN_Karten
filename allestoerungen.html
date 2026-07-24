@@ -134,6 +134,13 @@ margin-bottom: 5px !important;
  .leaflet-control-geocoder-icon:hover {
  background-color: #f0f0f0 !important;
  }
+ .leaflet-control-geocoder-icon::before{
+ content: "002";
+ font-family: "Font Awesome 6 Free";
+ font-weight: 900;
+ color: grey
+ font-size: 15px;
+}
  .custom-marker {
  width: 15px;
  height: 15px;
@@ -204,7 +211,7 @@ onAdd: function(map) {
 const container = L.DomUtil.create('div', 'leaflet-control-custom-st');
 stoerungen.forEach(function(stoerung){
 const button = L.DomUtil.create('a','',container);
-button.style.width = "190px";
+button.style.width = "150px";
 button.style.height = "40px";
 button.style.lineHeight = "40px";
 button.style.textAlign = "center";
