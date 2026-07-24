@@ -188,7 +188,10 @@ map.addControl(new viewControl());
  .addTo(map)
 const stoerungsMarker = L.layerGroup();
 stoerungen.forEach(function(stoerung){
-const center = stoerung.bounds.getCenter();
+const center = [
+    (stoerung.bounds[0][0] + stoerung.bounds[1][0]) / 2,
+    (stoerung.bounds[0][1] + stoerung.bounds[1][1]) / 2
+];
     L.marker(stoerung.center, {
         icon: L.divIcon({
             className: 'stoerungs-icon',
