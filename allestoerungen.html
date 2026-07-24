@@ -14,6 +14,26 @@
  height: 100%;
  margin: 0;
  }
+.leaflet-control-custom { 
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.3);
+    overflow: hidden;
+    margin-top: 5px !important;
+}
+.leaflet-control-custom a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    color: grey;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+    font-family: 'Montserrat', sans-serif;
+}
+.leaflet-control-custom a:hover { 
+    background: #f0f0f0;
+}
  .leaflet-container {
  height: 100%;
  width: 100%;
@@ -148,8 +168,10 @@ overlays.forEach(o => {L.imageOverlay(o.png,o.bounds
  const zoomFullExtentControl = L.Control.extend({
  options: { position: 'topleft' },
  onAdd: function () {
- const container = L.DomUtil.create('div', 'custom-control');
+ const container = L.DomUtil.create('div', 'leaflet-control-custom');
  container.innerHTML = '<i class="fas fa-home"></i>';
+container.style.width = "30px";
+container.style.height = "30px";
  L.DomEvent.on(container, 'click', () => map.fitBounds(bounds));
  return container;}});
  map.addControl(new zoomFullExtentControl());
@@ -157,8 +179,7 @@ const stoerungen = [{"name": "Blumenthal", "bounds": [[53.170185132, 8.528619404
 const viewControl = L.Control.extend({
 options: {position: 'topleft'},
 onAdd: function(map) {
-const container = L.DomUtil.create('div','leaflet-bar leaflet-control');
-container.style.marginTop = '45px'
+const container = L.DomUtil.create('div', 'leaflet-control-custom');
 stoerungen.forEach(function(stoerung){
 const button = L.DomUtil.create('a','',container);
 button.style.width = "200px";
