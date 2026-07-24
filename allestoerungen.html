@@ -151,6 +151,8 @@ overlays.forEach(o => {L.imageOverlay(o.png,o.bounds
  options: { position: 'topleft' },
  onAdd: function () {
  const container = L.DomUtil.create('div', 'custom-control');
+container.style.marginTop = '80px'
+container.style.marginLeft = '10px'
  container.innerHTML = '<i class="fas fa-home"></i>';
  L.DomEvent.on(container, 'click', () => map.fitBounds(bounds));
  return container;
