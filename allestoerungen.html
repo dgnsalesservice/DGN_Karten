@@ -168,7 +168,7 @@ button.style.textAlign = "center";
 button.style.fontSize = "12px";
 button.style.fontFamily = "Montserrat, sans-serif";
 button.innerHTML = "Störung in " + stoerung.name;
-button.pointer {cursor: pointer;}
+button.style.cursor="pointer";
 button.onclick = function(){
     map.fitBounds(
         stoerung.bounds,
