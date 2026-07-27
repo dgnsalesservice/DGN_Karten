@@ -186,7 +186,7 @@ map.fitBounds(bounds);
  L.control.zoom({
  position: 'topleft'
  }).addTo(map);
-const overlays = [{"png": "output_tiles/stoerung_69.png", "bounds": [[53.170185132, 8.528619404], [53.202405457, 8.62410379]]}, {"png": "output_tiles/stoerung_162.png", "bounds": [[50.140015555, 7.929725385], [50.221578332, 8.022248931]]}, {"png": "output_tiles/stoerung_1001.png", "bounds": [[51.587769975, 7.733138233], [51.610168252, 7.7628546]]}, {"png": "output_tiles/stoerung_1700.png", "bounds": [[51.903608425, 10.473915547], [51.938739487, 10.526463816]]}];
+const overlays = [{"png": "output_tiles/stoerung_69.png", "bounds": [[53.170185132, 8.528619404], [53.202405457, 8.62410379]]}, {"png": "output_tiles/stoerung_162.png", "bounds": [[50.140015555, 7.929725385], [50.221578332, 8.022248931]]}, {"png": "output_tiles/stoerung_1001.png", "bounds": [[51.587769975, 7.733138233], [51.610168252, 7.7628546]]}, {"png": "output_tiles/stoerung_1700.png", "bounds": [[51.903608425, 10.473915547], [51.938739487, 10.526463816]]}, {"png": "output_tiles/stoerung_1701.png", "bounds": [[51.94257995, 10.377482767], [51.958676672, 10.428263919]]}];
 overlays.forEach(o => {L.imageOverlay(o.png,o.bounds
 ).addTo(map);});
  const zoomFullExtentControl = L.Control.extend({
@@ -200,7 +200,7 @@ container.style.cursor ="pointer";
  L.DomEvent.on(container, 'click', () => map.fitBounds(bounds));
  return container;}});
  map.addControl(new zoomFullExtentControl());
-const stoerungen = [{"name": "Blumenthal", "bounds": [[53.170185132, 8.528619404], [53.202405457, 8.62410379]]}, {"name": "Laufenselden", "bounds": [[50.140015555, 7.929725385], [50.221578332, 8.022248931]]}, {"name": "B\u00f6nen", "bounds": [[51.587769975, 7.733138233], [51.610168252, 7.7628546]]}, {"name": "Oker", "bounds": [[51.903608425, 10.473915547], [51.938739487, 10.526463816]]}];
+const stoerungen = [{"name": "Blumenthal", "bounds": [[53.170185132, 8.528619404], [53.202405457, 8.62410379]]}, {"name": "Laufenselden", "bounds": [[50.140015555, 7.929725385], [50.221578332, 8.022248931]]}, {"name": "B\u00f6nen", "bounds": [[51.587769975, 7.733138233], [51.610168252, 7.7628546]]}, {"name": "Oker", "bounds": [[51.903608425, 10.473915547], [51.938739487, 10.526463816]]}, {"name": "Jerstedt", "bounds": [[51.94257995, 10.377482767], [51.958676672, 10.428263919]]}];
 const viewControl = L.Control.extend({
 options: {position: 'topleft'},
 onAdd: function(map) {
