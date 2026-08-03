@@ -144,7 +144,7 @@ cursor: pointer;
  </div>
  <script>
  const map = L.map('map', {zoomControl: false});
-const bounds = [[47.3, 6], [55.0, 15.0]];
+const bounds = [[49.978732201, 7.923836416], [50.423872789, 8.474329222]];
 map.fitBounds(bounds);
  const maptiler = L.tileLayer('https://api.maptiler.com/maps/basic/{z}/{x}/{y}.png?key=hP74ooTG3ciBab5RShCg',
  {attribution: '&copy; MapTiler https://maptiler.com', tileSize: 512, zoomOffset: -1, maxZoom: 20, className: 'grayscale-tiles',
@@ -152,7 +152,7 @@ map.fitBounds(bounds);
  L.control.zoom({
  position: 'topleft'
  }).addTo(map);
-const overlays = [];
+const overlays = [{"png": "output_tiles/stoerung_76.png", "bounds": [[50.361102578, 8.003421852], [50.374530336, 8.036905293]]}, {"png": "output_tiles/stoerung_162.png", "bounds": [[50.140015555, 7.929725385], [50.221578332, 8.022248931]]}, {"png": "output_tiles/stoerung_175.png", "bounds": [[50.142215392, 8.411897297], [50.171350557, 8.43767363]]}, {"png": "output_tiles/stoerung_177.png", "bounds": [[50.108391442, 8.432082233], [50.169928744, 8.474329222]]}, {"png": "output_tiles/stoerung_233.png", "bounds": [[50.398634613, 7.923836416], [50.409146867, 7.935643281]]}, {"png": "output_tiles/stoerung_486.png", "bounds": [[49.978732201, 7.936713981], [50.041979572, 7.987135223]]}, {"png": "output_tiles/stoerung_487.png", "bounds": [[50.068026457, 7.960177542], [50.119209762, 8.129190101]]}, {"png": "output_tiles/stoerung_491.png", "bounds": [[50.348644627, 8.036584657], [50.359612067, 8.053541435]]}, {"png": "output_tiles/stoerung_601.png", "bounds": [[50.29127322, 8.151808987], [50.321445202, 8.256117967]]}, {"png": "output_tiles/stoerung_602.png", "bounds": [[50.27395543, 8.144007536], [50.357463626, 8.292121007]]}, {"png": "output_tiles/stoerung_632.png", "bounds": [[50.367225578, 8.060149688], [50.375629181, 8.083584141]]}, {"png": "output_tiles/stoerung_1019.png", "bounds": [[50.369947653, 8.036443531], [50.378667525, 8.055138303]]}, {"png": "output_tiles/stoerung_1735.png", "bounds": [[50.410013, 8.053850712], [50.423872789, 8.082035628]]}, {"png": "output_tiles/stoerung_2058.png", "bounds": [[50.366399569, 7.993991041], [50.384593808, 8.04786837]]}];
 overlays.forEach(o => {L.imageOverlay(o.png,o.bounds
 ).addTo(map);});
  const zoomFullExtentControl = L.Control.extend({
@@ -166,7 +166,7 @@ container.style.cursor ="pointer";
  L.DomEvent.on(container, 'click', () => map.fitBounds(bounds));
  return container;}});
  map.addControl(new zoomFullExtentControl());
-const stoerungen = [];
+const stoerungen = [{"name": "B\u00e4rstadt,", "bounds": [[50.361102578, 8.003421852], [50.374530336, 8.036905293]]}, {"name": "B\u00e4rstadt,", "bounds": [[50.140015555, 7.929725385], [50.221578332, 8.022248931]]}, {"name": "B\u00e4rstadt,", "bounds": [[50.142215392, 8.411897297], [50.171350557, 8.43767363]]}, {"name": "B\u00e4rstadt,", "bounds": [[50.108391442, 8.432082233], [50.169928744, 8.474329222]]}, {"name": "B\u00e4rstadt,", "bounds": [[50.398634613, 7.923836416], [50.409146867, 7.935643281]]}, {"name": "B\u00e4rstadt,", "bounds": [[49.978732201, 7.936713981], [50.041979572, 7.987135223]]}, {"name": "B\u00e4rstadt,", "bounds": [[50.068026457, 7.960177542], [50.119209762, 8.129190101]]}, {"name": "B\u00e4rstadt,", "bounds": [[50.348644627, 8.036584657], [50.359612067, 8.053541435]]}, {"name": "B\u00e4rstadt,", "bounds": [[50.29127322, 8.151808987], [50.321445202, 8.256117967]]}, {"name": "B\u00e4rstadt,", "bounds": [[50.27395543, 8.144007536], [50.357463626, 8.292121007]]}, {"name": "B\u00e4rstadt,", "bounds": [[50.367225578, 8.060149688], [50.375629181, 8.083584141]]}, {"name": "B\u00e4rstadt,", "bounds": [[50.369947653, 8.036443531], [50.378667525, 8.055138303]]}, {"name": "B\u00e4rstadt,", "bounds": [[50.410013, 8.053850712], [50.423872789, 8.082035628]]}, {"name": "B\u00e4rstadt,", "bounds": [[50.366399569, 7.993991041], [50.384593808, 8.04786837]]}];
 const viewControl = L.Control.extend({
 options: {position: 'topleft'},
 onAdd: function(map) {
