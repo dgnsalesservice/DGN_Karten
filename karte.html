@@ -3,7 +3,7 @@
 <head>
  <meta charset="utf-8">
  <meta name="viewport" content="width=device-width, initial-scale=1">
- <title>Störungskarte </title>
+ <title>Karte </title>
  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
  <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
@@ -46,9 +46,6 @@
     font-family: 'Montserrat', sans-serif;
      margin-left: 3px;
      margin-right: 3px;
-}
-.leaflet-control-custom-st a:hover { 
-    background: #f0f0f0;
 }
 .leaflet-control-custom-st a:hover { 
     background: #f0f0f0;
@@ -110,38 +107,14 @@ cursor: pointer;
  border-radius: 50%;
  border: 1px solid white;
  }
- #legend {
- position: absolute;
- bottom: 10px;
- left: 10px;
- display: block;
- z-index: 1000;
- background: white;
- padding: 10px;
- border-radius: 4px;
- box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
- font-family: 'Montserrat', sans-serif;
- }
- #legend div {
- font-size: 12px;
- line-height: 18px;
- }
  .grayscale-tiles, .grayscale-tile {
  filter: grayscale(100%) brightness(95%) contrast(1.1) !important;
  -webkit-filter: grayscale(100%);}
- //.grayscale-tile {
- //filter: grayscale(100%);
- }
  </style>
  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
 </head>
 <body>
  <div id="map"></div>
- <div id="legend">
- <div><span style="display:inline-block; width:20px; height:10px; background:#FF7F00; margin-right:5px;"></span>Totalausfall</div>
-<div><span style="display:inline-block;width:20px; height:10px; background:#00143C; margin-right:5px;"></span>Service-Einschränkung</div>
-<div><span style="display:inline-block;width:20px; height:10px; background:#FFC17D; margin-right:5px;"></span>Unbekannte Störung</div>
- </div>
  <script>
  const map = L.map('map', {zoomControl: false});
 const bounds = [[49.098528284, 6.3501462], [51.157197094, 9.151090068]];
@@ -152,7 +125,7 @@ map.fitBounds(bounds);
  L.control.zoom({
  position: 'topleft'
  }).addTo(map);
-const overlays = [{"png": "output_tiles/stoerung_2107.png", "bounds": [[49.098528284, 6.3501462], [51.157197094, 9.151090068]]}, {"png": "output_tiles/stoerung_1568.png", "bounds": [[49.098528284, 6.3501462], [51.157197094, 9.151090068]]}, {"png": "output_tiles/stoerung_127.png", "bounds": [[49.098528284, 6.3501462], [51.157197094, 9.151090068]]}];
+const overlays = [{"png": "output_tiles/sp_339.png", "bounds": [[49.098528284, 9.100146525], [49.119594304, 9.151090068]]}, {"png": "output_tiles/sp_1568.png", "bounds": [[51.147842311, 6.3501462], [51.153680112, 6.360616557]]}, {"png": "output_tiles/sp_1811.png", "bounds": [[49.1107054, 9.1248812], [49.1138168, 9.1337661]]}, {"png": "output_tiles/sp_1812.png", "bounds": [[49.1081888, 9.1445461], [49.109539, 9.1484925]]}, {"png": "output_tiles/sp_1813.png", "bounds": [[49.1016153, 9.109301199], [49.1034629, 9.112709]]}, {"png": "output_tiles/sp_2107.png", "bounds": [[51.150844714, 6.350592937], [51.157197094, 6.373438259]]}];
 overlays.forEach(o => {L.imageOverlay(o.png,o.bounds
 ).addTo(map);});
  const zoomFullExtentControl = L.Control.extend({
@@ -166,12 +139,12 @@ container.style.cursor ="pointer";
  L.DomEvent.on(container, 'click', () => map.fitBounds(bounds));
  return container;}});
  map.addControl(new zoomFullExtentControl());
-const stoerungen = [{"name": "Jerstedt", "bounds": [[49.098528284, 6.3501462], [51.157197094, 9.151090068]]}, {"name": "Jerstedt", "bounds": [[49.098528284, 6.3501462], [51.157197094, 9.151090068]]}, {"name": "Oker", "bounds": [[49.098528284, 6.3501462], [51.157197094, 9.151090068]]}];
+const projekte = [{"name": "Projekt 339", "bounds": [[49.098528284, 9.100146525], [49.119594304, 9.151090068]]}, {"name": "Projekt 1568", "bounds": [[51.147842311, 6.3501462], [51.153680112, 6.360616557]]}, {"name": "Projekt 1811", "bounds": [[49.1107054, 9.1248812], [49.1138168, 9.1337661]]}, {"name": "Projekt 1812", "bounds": [[49.1081888, 9.1445461], [49.109539, 9.1484925]]}, {"name": "Projekt 1813", "bounds": [[49.1016153, 9.109301199], [49.1034629, 9.112709]]}, {"name": "Projekt 2107", "bounds": [[51.150844714, 6.350592937], [51.157197094, 6.373438259]]}];
 const viewControl = L.Control.extend({
 options: {position: 'topleft'},
 onAdd: function(map) {
 const container = L.DomUtil.create('div', 'leaflet-control-custom-st');
-if (stoerungen.length === 0) {
+if (projekte.length === 0) {
     const button = L.DomUtil.create('a', '', container);
     button.style.height = '40px';
     button.style.lineHeight = '40px';
@@ -179,21 +152,21 @@ if (stoerungen.length === 0) {
     button.style.fontSize = '12px';
     button.style.fontFamily = 'Montserrat, sans-serif';
     button.style.cursor = 'default';
-    button.innerHTML = 'Aktuell keine Störungen';
+    button.innerHTML = 'Aktuell keine Objekte';
     button.style.color = 'grey';
 } else {
-stoerungen.forEach(function(stoerung){
+projekte.forEach(function(projekt){
 const button = L.DomUtil.create('a','',container);
 button.style.height = "40px";
 button.style.lineHeight = "40px";
 button.style.textAlign = "center";
 button.style.fontSize = "12px";
 button.style.fontFamily = "Montserrat, sans-serif";
-button.innerHTML = stoerung.name
+button.innerHTML = projekt.name
 button.style.cursor="pointer";
 button.onclick = function(){
     map.fitBounds(
-        stoerung.bounds,
+        projekt.bounds,
         {animate: true,
          duration: 2.5           }
     );};});
@@ -205,38 +178,38 @@ map.addControl(new viewControl());
  .on('markgeocode', function (e) {
  map.setView(e.geocode.center, 16);})
  .addTo(map)
-const stoerungsMarker = L.layerGroup();
-stoerungen.forEach(function(stoerung){
+const projektMarker = L.layerGroup();
+projekte.forEach(function(projekt){
 const center = [
-    (stoerung.bounds[0][0] + stoerung.bounds[1][0]) / 2,
-    (stoerung.bounds[0][1] + stoerung.bounds[1][1]) / 2
+    (projekt.bounds[0][0] + projekt.bounds[1][0]) / 2,
+    (projekt.bounds[0][1] + projekt.bounds[1][1]) / 2
 ];
  const marker =   L.marker(center, {
         icon: L.divIcon({
-            className: 'stoerungs-icon',
+            className: 'projekt-icon',
             html: '📍',
             iconSize: [30,30]
         })
     });
 marker.on('click', function(){
-    map.fitBounds(stoerung.bounds, {
+    map.fitBounds(projekt.bounds, {
         animate: true,
         duration: 2.5
     });
 });
-marker.addTo(stoerungsMarker);
+marker.addTo(projektMarker);
 });
 if (map.getZoom() < 10) {
-    stoerungsMarker.addTo(map);
+    projektMarker.addTo(map);
 };
 map.on('zoomend', function(){
     if (map.getZoom() < 10) {
-        if (!map.hasLayer(stoerungsMarker)) {
-            stoerungsMarker.addTo(map);
+        if (!map.hasLayer(projektMarker)) {
+            projektMarker.addTo(map);
         }
     } else {
-        if (map.hasLayer(stoerungsMarker)) {
-            map.removeLayer(stoerungsMarker);
+        if (map.hasLayer(projektMarker)) {
+            map.removeLayer(projektMarker);
         }
     }
 });
