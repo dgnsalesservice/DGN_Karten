@@ -107,6 +107,22 @@ cursor: pointer;
  border-radius: 50%;
  border: 1px solid white;
  }
+        #legend {
+            position: absolute;
+            top: 20px;
+            left: 60px;
+            display: block;
+            z-index: 1000;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+            font-family: 'Montserrat', sans-serif;
+        }
+        #legend div {
+            font-size: 12px;
+            line-height: 18px;
+        }
  .grayscale-tiles, .grayscale-tile {
  filter: grayscale(100%) brightness(95%) contrast(1.1) !important;
  -webkit-filter: grayscale(100%);}
@@ -115,6 +131,11 @@ cursor: pointer;
 </head>
 <body>
  <div id="map"></div>
+<div id="legend">
+        <div><span style="display:inline-block; width:20px; height:10px; background:#FF7F00; margin-right:5px;"></span>Ausbauphase 1: Glasfasernetz vorhanden oder geplant</div>
+        <div><span style="display:inline-block;width:20px; height:10px; background:#00143C; margin-right:5px;"></span>Ausbauphase 2: Interessenbekundung möglich</div>
+        <div><span style="display:inline-block;width:20px; height:10px; background:#FFC17D; margin-right:5px;"></span>Ausbauphase 3: Gefördertes Ausbaugebiet </div>
+    </div>
  <script>
  const map = L.map('map', {zoomControl: false});
 const bounds = [[51.147842311, 6.3501462], [51.157197094, 6.373438259]];
