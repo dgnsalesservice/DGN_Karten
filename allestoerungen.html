@@ -144,7 +144,7 @@ cursor: pointer;
  </div>
  <script>
  const map = L.map('map', {zoomControl: false});
-const bounds = [[49.0909038, 8.833395822], [49.295243996, 9.651151165]];
+const bounds = [[47.3, 6], [55.0, 15.0]];
 map.fitBounds(bounds);
  const maptiler = L.tileLayer('https://api.maptiler.com/maps/basic/{z}/{x}/{y}.png?key=hP74ooTG3ciBab5RShCg',
  {attribution: '&copy; MapTiler https://maptiler.com', tileSize: 512, zoomOffset: -1, maxZoom: 20, className: 'grayscale-tiles',
@@ -152,7 +152,7 @@ map.fitBounds(bounds);
  L.control.zoom({
  position: 'topleft'
  }).addTo(map);
-const overlays = [{"png": "output_tiles/stoerung_286.png", "bounds": [[49.117093337, 9.367274621], [49.204448405, 9.525460598]]}, {"png": "output_tiles/stoerung_457.png", "bounds": [[49.182243698, 9.1709514], [49.216981801, 9.311201547]]}, {"png": "output_tiles/stoerung_204.png", "bounds": [[49.19816775, 8.972070758], [49.295243996, 9.153270079]]}, {"png": "output_tiles/stoerung_207.png", "bounds": [[49.214539215, 9.128841686], [49.24452263, 9.193370654]]}, {"png": "output_tiles/stoerung_278.png", "bounds": [[49.1654836, 9.414629973], [49.284862191, 9.579525339]]}, {"png": "output_tiles/stoerung_450.png", "bounds": [[49.174077749, 8.963262801], [49.224193903, 9.007105241]]}, {"png": "output_tiles/stoerung_456.png", "bounds": [[49.161278235, 9.238477767], [49.182411824, 9.279717444]]}, {"png": "output_tiles/stoerung_201.png", "bounds": [[49.209886916, 9.185667441], [49.271966174, 9.247021167]]}, {"png": "output_tiles/stoerung_158.png", "bounds": [[49.0909038, 8.833395822], [49.175812663, 8.960441292]]}, {"png": "output_tiles/stoerung_335.png", "bounds": [[49.177329965, 9.542291349], [49.258884778, 9.651151165]]}, {"png": "output_tiles/stoerung_284.png", "bounds": [[49.1345612, 9.257487585], [49.186085824, 9.357870246]]}, {"png": "output_tiles/stoerung_341.png", "bounds": [[49.183954839, 8.923724359], [49.205890024, 8.9408351]]}, {"png": "output_tiles/stoerung_211.png", "bounds": [[49.169816145, 9.032196691], [49.197676102, 9.056775547]]}, {"png": "output_tiles/stoerung_72.png", "bounds": [[49.189718205, 9.180242016], [49.204373999, 9.207500599]]}, {"png": "output_tiles/stoerung_213.png", "bounds": [[49.232391112, 9.159291733], [49.259000901, 9.186096924]]}, {"png": "output_tiles/stoerung_458.png", "bounds": [[49.25212467, 9.068650204], [49.276386645, 9.116302526]]}, {"png": "output_tiles/stoerung_340.png", "bounds": [[49.204133751, 9.182406927], [49.218881976, 9.206670241]]}];
+const overlays = [];
 overlays.forEach(o => {L.imageOverlay(o.png,o.bounds
 ).addTo(map);});
  const zoomFullExtentControl = L.Control.extend({
@@ -166,7 +166,7 @@ container.style.cursor ="pointer";
  L.DomEvent.on(container, 'click', () => map.fitBounds(bounds));
  return container;}});
  map.addControl(new zoomFullExtentControl());
-const stoerungen = [{"name": "Adolzfurt", "bounds": [[49.117093337, 9.367274621], [49.204448405, 9.525460598]]}, {"name": "Amorbach", "bounds": [[49.182243698, 9.1709514], [49.216981801, 9.311201547]]}, {"name": "Babstadt", "bounds": [[49.19816775, 8.972070758], [49.295243996, 9.153270079]]}, {"name": "Bad Wimpfen", "bounds": [[49.214539215, 9.128841686], [49.24452263, 9.193370654]]}, {"name": "Baumerlenbach", "bounds": [[49.1654836, 9.414629973], [49.284862191, 9.579525339]]}, {"name": "Berwangen", "bounds": [[49.174077749, 8.963262801], [49.224193903, 9.007105241]]}, {"name": "Binswangen", "bounds": [[49.161278235, 9.238477767], [49.182411824, 9.279717444]]}, {"name": "Duttenberg", "bounds": [[49.209886916, 9.185667441], [49.271966174, 9.247021167]]}, {"name": "Eppingen", "bounds": [[49.0909038, 8.833395822], [49.175812663, 8.960441292]]}, {"name": "Eschelbach", "bounds": [[49.177329965, 9.542291349], [49.258884778, 9.651151165]]}, {"name": "Gellmersbach", "bounds": [[49.1345612, 9.257487585], [49.186085824, 9.357870246]]}, {"name": "Ittlingen", "bounds": [[49.183954839, 8.923724359], [49.205890024, 8.9408351]]}, {"name": "Massenbachhausen", "bounds": [[49.169816145, 9.032196691], [49.197676102, 9.056775547]]}, {"name": "Obereisesheim", "bounds": [[49.189718205, 9.180242016], [49.204373999, 9.207500599]]}, {"name": "Offenau", "bounds": [[49.232391112, 9.159291733], [49.259000901, 9.186096924]]}, {"name": "Siegelsbach", "bounds": [[49.25212467, 9.068650204], [49.276386645, 9.116302526]]}, {"name": "Untereisesheim", "bounds": [[49.204133751, 9.182406927], [49.218881976, 9.206670241]]}];
+const stoerungen = [];
 const viewControl = L.Control.extend({
 options: {position: 'topleft'},
 onAdd: function(map) {
